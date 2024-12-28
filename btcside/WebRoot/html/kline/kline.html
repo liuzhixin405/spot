@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html style="margin:0px; height: 100%; width: 100%;" >
+	<head>
+		<title>BFX</title>
+		<meta charset="UTF-8">
+		<script>
+			Symbol = 'btc';
+			TradeType = 'contract';
+			
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r!=null) return  unescape(r[2]); return null;
+			}
+			
+			var sym = getQueryString("symbol");
+			if (sym != null && sym != '') {
+				Symbol = sym;
+			}
+			
+			var type = getQueryString("contractType");
+			if (type != null && type != '') {
+				TradeType = type;
+			}
+			
+		</script>
+		<!-- Fix for iOS Safari zooming bug -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<script type="text/javascript" src="charting_library/charting_library.min.js"></script>
+		<script type="text/javascript" src="datafeeds/udf/dist/polyfills.js"></script>
+		<script type="text/javascript" src="datafeeds/udf/dist/bundle.js?v=106"></script>
+		<script type="text/javascript" src="datafeeds/udf/jquery.1.7.1.min.js"></script>
+		<script type="text/javascript" src="datafeeds/udf/index_pc_all.js?v=105"></script>
+		
+
+	</head>
+
+	<body style="margin:0px; height: 100%; width: 100%;">
+		<div id="tv_chart_container" style="height: 100%; width: 100%;"></div>
+	</body>
+
+</html>

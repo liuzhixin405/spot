@@ -1,0 +1,89 @@
+.js-button-text.text-1sK7vbvh- {
+    display: none;
+}
+.chart-page {
+    background: #FFFFFF;
+}
+.chart-page .chart-container {
+    border: none;
+}
+.layout__area--top {
+    background: #FFFFFF;
+}
+.group-wWM3zP_M- {
+    background: #FFFFFF;
+}
+/*.layout__area--left .drawingToolbar-U3_QXRof- {
+    background: #1F293A;
+}*/
+.loading-indicator {
+    background: #FFFFFF;
+}
+.customButton--jqJTfH5- {
+    padding: 0 10px;
+}
+.fill-2axUON87-{
+    display: none;
+}
+.group-wWM3zP_M- .icon-beK_KS0k- {
+    color: #94ABC0;
+}
+.group-wWM3zP_M- .customButton--jqJTfH5- span{
+    padding: 5px 0;
+    color: #94ABC0;
+}
+.group-wWM3zP_M-.active .customButton--jqJTfH5- span {
+    color: #333333;
+	border-bottom: #5D8FE9 solid 2px;
+}
+.group-wWM3zP_M-:hover .customButton--jqJTfH5- span {
+    color: #333333;
+	border-bottom: #5D8FE9 solid 2px;
+}
+.group-wWM3zP_M-:hover .button-3xrjDzA4- {
+    color: #5D8FE9;
+}
+.group-wWM3zP_M-:hover .icon-beK_KS0k- {
+    color: #5D8FE9;
+}
+.button-2ioYhFEY-.isInteractive-20uLObIc-.isOpened-p-Ume5l9- {
+    background: #FFFFFF;
+}
+.button-2ioYhFEY-.isInteractive-20uLObIc-.isOpened-p-Ume5l9- {
+    background: #FFFFFF;
+}
+.control-bar-wrapper {
+	display: none;
+}
+/*.layout__area--left .group-2JyOhh7Z- {
+    background: #1F293A;
+}
+.group-wWM3zP_M-:first-child {
+    order: 1;
+}
+*/
+.group-wWM3zP_M-:nth-child(7) {
+	flex: 1;
+	min-width: 0;
+}
+
+#header-toolbar-properties {
+	display: none;
+}
+
+.fill-2axUON87- {
+	display: none;
+}
+
+.toggleButton-13QgefpG- {
+    bottom: 50%;
+}
+.common-tooltip-wrapper {
+    display: none;
+}
+
+/*全屏交易下  对设置弹窗的处理*/
+._tv-dialog._tv-dialog-nonmodal.ui-draggable {
+    max-height: 100%;
+    overflow: auto;
+}

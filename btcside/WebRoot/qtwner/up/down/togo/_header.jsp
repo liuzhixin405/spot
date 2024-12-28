@@ -1,0 +1,36 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="jsp/_basepage.jsp"%>
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link href="<%=jspPath%>css/admin.css" type="text/css" rel="stylesheet">
+	</head>
+	<body>
+		<table cellspacing="0" cellpadding="0" width="100%"
+			background="<%=jspPath%>images/header_bg.jpg" border="0">
+			<tr height="56">
+				<td width="260">
+					<img height="56" src="<%=jspPath%>images/header_left.jpg" width="260">
+				</td>
+				<td style="font-weight: bold; color: #fff; padding-top: 20px"
+					align="middle">
+					欢迎你, 管理员 &nbsp;&nbsp;
+					<a style="color: #fff" href="" target="main"></a> &nbsp;&nbsp;
+					<a style="color: #fff"
+						onclick="if (confirm('确定要退出吗？')) return true; else return false;"
+						href="<%=actionPath%>qtner/userout.do" target="_top">退出系统</a>
+				</td>
+				<td align="right" width="268">
+					<img height="56" src="<%=jspPath%>images/Btcside.png" width="268">
+				</td>
+			</tr>
+		</table>
+		<table cellspacing="0" cellpadding="0" width="100%" border="0">
+			<tr bgcolor="#1c5db6" height="4">
+				<td>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

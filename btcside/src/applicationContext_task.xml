@@ -1,0 +1,2860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc
+     http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 定时任务配置，包括test1和test2 -->
+	<!-- Scheduler包含一个Trigger列表，每个Trigger表示一个作业 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!--QuartzScheduler 延时启动，/秒，应用启动后 QuartzScheduler 再启动-->
+		<property name="startupDelay" value="10" />
+		<!-- 普通触发器：触发器列表，（可以配置多个任务）-->
+		<property name="triggers">
+			<list>
+			
+				 <!--K线数据 websocket -->
+				 <ref bean="JobTrigger_WesocketApiJson" /> 		<!-- WebSocket API -->
+				 <ref bean="JobTrigger_KLineWSApiJson" /> 		<!-- WebSocket API -->
+				 <ref bean="JobTrigger_PushWSApiJson" /> 		<!-- WebSocket API -->
+				 <ref bean="JobTrigger_DepthWSApiJson" /> 		<!-- WebSocket API -->
+				 
+				 <ref bean="JobTrigger_OpenWsDepthV1" />		<!-- Open WebSocket API -->
+				 <ref bean="JobTrigger_OpenWsKlineV1" />		<!-- Open WebSocket API -->
+				 <ref bean="JobTrigger_OpenWsTradeV1" />		<!-- Open WebSocket API -->
+				 
+				 
+				 <!-- 现货交易相关 -->
+				 <ref bean="nJobTrigger_OneMinTrade"/>
+				 
+				 <ref bean="spotOpenPositionJobTrigger" />
+				 <ref bean="sJobTrigger_OneMinTrade" />
+				 
+				 <ref bean="sJobTrigger_TickerApiJson" />
+				 <ref bean="sJobTrigger_TradeApiJson"/>
+				 <ref bean="sJobTrigger_DepthApiJson"/>
+				 <ref bean="sGetTradeDataJobTrigger"/>
+				 
+				 <ref bean="cancelSpotQuantPending" />
+				 <ref bean="spotScalpingJobTrigger" />
+				 <ref bean="spotDepthAdjustTrigger" />
+				 <ref bean="spotHedgingJobTrigger" />
+				 <ref bean="JobTrigger_BakSpotTable" />  
+			</list>
+		</property>
+		<property name="autoStartup" value="true" />
+	</bean>
+
+	<!-- Trigger的配置 -->
+	<bean id="JobTrigger_FindBPI" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_FindBPI" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每30秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_StockBPI" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_StockBPI" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每30秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+		<bean id="nJobTrigger_FindBPI" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nJobDetail_FindBPI" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每30秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="nJobTrigger_StockBPI" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nJobDetail_StockBPI" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每30秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_LmaxBPI" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_LmaxBPI" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每30秒运行一次 -->
+		<property name="repeatInterval">
+			<value>30000</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_ExperiBPI" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_ExperiBPI" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5200</value>
+		</property>
+		<!-- 每30秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_CompositeBPI" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_CompositeBPI" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>10000</value>
+		</property>
+		<!-- 每30秒运行一次 -->
+		<property name="repeatInterval">
+			<value>5000</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_GetTicker" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_GetTicker" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每3秒运行一次 -->
+		<property name="repeatInterval">
+			<value>2000</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_TickerApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_TickerApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每10秒运行一次 -->
+		<property name="repeatInterval">
+			<value>20000</value>
+		</property> 
+	</bean>
+	<bean id="nJobTrigger_TickerApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nJobDetail_TickerApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每10秒运行一次 -->
+		<property name="repeatInterval">
+			<value>20000</value>
+		</property> 
+	</bean>
+	<bean id="dJobTrigger_TickerApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dJobDetail_TickerApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每10秒运行一次 -->
+		<property name="repeatInterval">
+			<value>3000</value>
+		</property> 
+	</bean>
+	<bean id="vJobTrigger_TickerApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vJobDetail_TickerApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每10秒运行一次 -->
+		<property name="repeatInterval">
+			<value>10000</value>
+		</property> 
+	</bean>
+	<bean id="sJobTrigger_TickerApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sJobDetail_TickerApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每10秒运行一次 -->
+		<property name="repeatInterval">
+			<value>10000</value>
+		</property> 
+	</bean>
+	<!--交易服务  -->
+	<bean id="openPositionQuartzJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="openPositionQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每0.05秒运行一次 -->
+		<property name="repeatInterval">
+			<value>50</value>
+		</property> 
+	</bean>
+	<bean id="nOpenPositionQuartzJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nOpenPositionQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每0.05秒运行一次 -->
+		<property name="repeatInterval">
+			<value>50</value>
+		</property> 
+	</bean>	
+	<bean id="dOpenPositionQuartzJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dOpenPositionQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3500</value>
+		</property>
+		<!-- 每0.02秒运行一次 -->
+		<property name="repeatInterval">
+			<value>50</value>
+		</property> 
+	</bean>
+	<bean id="planPendingToCacheJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="planPendingToCacheJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.02秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="nPlanPendingToCacheJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nPlanPendingToCacheJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.02秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="dPlanPdToCacheJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dPlanPdToCacheQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.02秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="vOpenPositionQuartzJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vOpenPositionQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>50</value>
+		</property> 
+	</bean>
+	<bean id="vPlanPdToCacheJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vPlanPdToCacheQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3100</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="userMonitorTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="userMonitorJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4600</value>
+		</property>
+		<!-- 每10秒运行一次 -->
+		<property name="repeatInterval">
+			<value>5000</value>
+		</property> 
+	</bean>
+	<bean id="nUserMonitorTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nUserMonitorJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4600</value>
+		</property>
+		<!-- 每10秒运行一次 -->
+		<property name="repeatInterval">
+			<value>5000</value>
+		</property> 
+	</bean>
+	<!--币币交易服务  -->
+	<bean id="spotOpenPositionJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="spotOpenPositionJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3500</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>50</value>
+		</property> 
+	</bean>
+	<!-- 产生新合约 -->
+	<bean id="newTransactionJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="newTransactionQuartzJobDetail" />
+		</property>
+		<property name="cronExpression">  
+			<value>0 20 15 L * ?</value>   <!-- 每月最后一天的15:20执行1次 -->
+		</property>
+	</bean>
+	<!-- 日交割合约自动创建 -->
+	<bean id="dAutoCreateDayContractTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dAutoCreateDayDetail" />
+		</property>
+		<property name="cronExpression">  
+			<value>20 0 16 * * ?</value>   <!-- 每天的16:00执行1次 -->
+		</property>
+	</bean>
+	<!-- 获取交易页面缓存数据-->
+	<bean id="getTradeDataJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="getTradeDataQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="nGetTradeDataJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nGetTradeDataQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- 获取交易页面缓存数据-->
+	<bean id="dGetTradeDataJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dGetTradeDataQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- 获取交易页面缓存数据-->
+	<bean id="vGetTradeDataJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vGetTradeDataQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- 获取交易页面缓存数据-->
+	<bean id="sGetTradeDataJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sGetTradeDataQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- WebSocket API缓存数据-->
+	<bean id="JobTrigger_WesocketApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="wesocketApiJsonDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- WebSocket API缓存数据-->
+	<bean id="JobTrigger_KLineWSApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="klineWSApiJsonDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_DepthWSApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="kdepthWSApiJsonDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>500</value>
+		</property> 
+	</bean>
+	<!-- WebSocket API缓存数据-->
+	<bean id="JobTrigger_PushWSApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="pushWSApiJsonDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- Open WebSocket 深度数据推送-->
+	<bean id="JobTrigger_OpenWsDepthV1" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="openWsDepthV1Detail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- Open WebSocket K线数据推送-->
+	<bean id="JobTrigger_OpenWsKlineV1" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="openWsKlineV1Detail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5500</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- Open WebSocket 交易数据推送-->
+	<bean id="JobTrigger_OpenWsTradeV1" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="openWsTradeV1Detail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5600</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<!-- WebSocket 获取股指数据-->
+	<bean id="JobTrigger_GetStock" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="getStockDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2200</value>
+		</property>
+		<!-- 每3秒运行一次 -->
+		<property name="repeatInterval">
+			<value>3000</value>
+		</property> 
+	</bean>
+	<!-- WebSocket 获取股指数据-->
+	<bean id="JobTrigger_GetFutures" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="getFuturesDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每3秒运行一次 -->
+		<property name="repeatInterval">
+			<value>3000</value>
+		</property> 
+	</bean>
+	<!-- WebSocket 获取A50数据-->
+	<bean id="JobTrigger_GetA50" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="getA50Detail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每3秒运行一次 -->
+		<property name="repeatInterval">
+			<value>3000</value>
+		</property> 
+	</bean>
+	<!-- 止盈止损-->
+	<bean id="stopLossJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="stopLossQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="nStopLossJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nStopLossQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="dStopLossJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dStopLossQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="vStopLossJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vStopLossQuartzJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_TradeApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_TradeApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5100</value>
+		</property>
+		<!-- 每5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property>
+	</bean>
+	<bean id="nJobTrigger_TradeApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nJobDetail_TradeApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5100</value>
+		</property>
+		<!-- 每5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property>
+	</bean>
+	<bean id="dJobTrigger_TradeApiJson" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dJobDetail_TradeApiJson" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0/1 * * * * ?</value>   <!-- 从第6s开始，每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="vJobTrigger_TradeApiJson" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vJobDetail_TradeApiJson" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0/1 * * * * ?</value>   <!-- 从第6s开始，每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="sJobTrigger_TradeApiJson" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sJobDetail_TradeApiJson" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0/1 * * * * ?</value>   <!-- 从第6s开始，每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_DepthApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_DepthApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>500</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>300</value>
+		</property>
+	</bean>
+	<bean id="nJobTrigger_DepthApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nJobDetail_DepthApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>500</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>300</value>
+		</property>
+	</bean>
+	<bean id="dJobTrigger_DepthApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dJobDetail_DepthApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>600</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>300</value>
+		</property>
+	</bean>
+	<bean id="vJobTrigger_DepthApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vJobDetail_DepthApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>700</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property>
+	</bean>
+	<bean id="sJobTrigger_DepthApiJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sJobDetail_DepthApiJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>800</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property>
+	</bean>
+	<bean id="JobTrigger_IncreaseJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_IncreaseJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3100</value>
+		</property>
+		<!-- 每60秒运行一次 -->
+		<property name="repeatInterval">
+			<value>60000</value>
+		</property> 
+	</bean>
+	<bean id="nJobTrigger_IncreaseJson" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nJobDetail_IncreaseJson" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3100</value>
+		</property>
+		<!-- 每60秒运行一次 -->
+		<property name="repeatInterval">
+			<value>60000</value>
+		</property> 
+	</bean>
+	<bean id="dJobTrigger_IncreaseJson" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dJobDetail_IncreaseJson" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>12 0/1 * * * ?</value>   <!-- 从第6s开始，每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="vJobTrigger_IncreaseJson" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vJobDetail_IncreaseJson" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>12 0/1 * * * ?</value>   <!-- 从第6s开始，每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="appendBailTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="appendBailDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>500</value>
+		</property> 
+	</bean>
+	<bean id="overFlowTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="overFlowDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>500</value>
+		</property> 
+	</bean>
+	<bean id="nOverFlowTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nOverFlowDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>500</value>
+		</property> 
+	</bean>
+	<bean id="dOverFlowTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dOverFlowDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>500</value>
+		</property> 
+	</bean>
+	<bean id="vOverFlowTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vOverFlowDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>2000</value>
+		</property> 
+	</bean>
+	<bean id="depthAdjustTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="depthAdjustDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>300</value>
+		</property> 
+	</bean>
+	<bean id="nDepthAdjustTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nDepthAdjustDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>300</value>
+		</property> 
+	</bean>
+	<bean id="dDepthAdjustTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dDepthAdjustDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>2000</value>
+		</property> 
+	</bean>
+	<bean id="vDepthAdjustTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vDepthAdjustDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>8000</value>
+		</property> 
+	</bean>
+	<bean id="spotDepthAdjustTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="spotDepthAdjustDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5200</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>2000</value>
+		</property> 
+	</bean>
+	<bean id="cancelQuantPendingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cancelQuantPendingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>500</value>
+		</property> 
+	</bean>
+	<bean id="nCancelQuantPendingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nCancelQuantPendingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>500</value>
+		</property> 
+	</bean>
+	<bean id="cancelSpotQuantPending" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cancelSpotQuantPendingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="cancelDeliveryQuantPending" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cancelDeliveryQuantPendingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>2000</value>
+		</property>
+		<!-- 每2秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1500</value>
+		</property> 
+	</bean>
+	<bean id="scalpingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="scalpingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property>
+	</bean>
+	<bean id="nScalpingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nScalpingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property>
+	</bean>
+	<bean id="spotScalpingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="spotScalpingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5200</value>
+		</property>
+		<!-- 每1秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property>
+	</bean>
+	<bean id="vScalpingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vScalpingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="dScalpingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dScalpingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="spotBTScalpingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="spotBTScalpingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>6200</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>1000</value>
+		</property> 
+	</bean>
+	<bean id="spotBTDepthTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="spotBTDepthJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4200</value>
+		</property>
+		<!-- 每0.05秒运行一次 -->
+		<property name="repeatInterval">
+			<value>50</value>
+		</property> 
+	</bean>
+	<bean id="hedgingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="hedgingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>100</value>
+		</property> 
+	</bean>
+	<bean id="nHedgingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nHedgingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>100</value>
+		</property> 
+	</bean>
+	<bean id="dHedgingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dHedgingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3200</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>100</value>
+		</property> 
+	</bean>
+	<bean id="spotHedgingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sHedgingJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3200</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>100</value>
+		</property> 
+	</bean>
+	<bean id="hedgingBalanceJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="hedgingBalanceJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>3000</value>
+		</property> 
+	</bean>
+	<bean id="dHedgingBalanceJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dHedgingBalanceJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3500</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>3000</value>
+		</property> 
+	</bean>
+	<bean id="spotHedgingBalanceJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sHedgingBalanceJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3200</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>3000</value>
+		</property> 
+	</bean>
+	<bean id="outsideBalanceJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="outsideBalanceJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>10000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>30000</value>
+		</property> 
+	</bean>
+	<bean id="hedgingCheckJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="hedgingCheckJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>10000</value>
+		</property> 
+	</bean>
+	<bean id="nHedgingCheckJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nHedgingCheckJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>10000</value>
+		</property> 
+	</bean>
+	<bean id="dHedgingCheckJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dHedgingCheckJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5300</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>10000</value>
+		</property> 
+	</bean>
+	<bean id="spotHedgingCheckJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sHedgingCheckJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>5300</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>10000</value>
+		</property> 
+	</bean>
+	<bean id="checkOrderJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="checkOrderJobDetail" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>3000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>200</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_BfcExchange" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_BfcExchange" />
+		</property>
+		<!-- 第一次在1分钟之后开始运行 -->
+		<property name="startDelay">
+			<value>4000</value>
+		</property>
+		<!-- 每0.5秒运行一次 -->
+		<property name="repeatInterval">
+			<value>300</value>
+		</property> 
+	</bean>
+	<bean id="JobTrigger_CheckBalance" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_CheckBalance" />
+		</property>
+		<property name="startDelay">
+			<value>1000</value>
+		</property>
+		<property name="repeatInterval">
+			<value>10</value>
+		</property> 
+	</bean>
+	<bean id="fundingFeeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="fundingFeeJobDetail" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 * * * * ?</value>  <!-- 每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="nFundingFeeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nFundingFeeJobDetail" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 * * * * ?</value>  <!-- 每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="vFundingFeeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vFundingFeeJobDetail" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 * * * * ?</value>  <!-- 每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_UsdRate" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_UsdRate" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0/1 * * * ?</value>   <!-- 从第6s开始，每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_OneMinTrade" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_OneMinTrade" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0/1 * * * * ?</value>  <!-- 每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="nJobTrigger_OneMinTrade" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nJobDetail_OneMinTrade" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0/1 * * * * ?</value>  <!-- 每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="dJobTrigger_OneMinTrade" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="dJobDetail_OneMinTrade" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0/1 * * * * ?</value>  <!-- 每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="vJobTrigger_OneMinTrade" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vJobDetail_OneMinTrade" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0/1 * * * * ?</value>  <!-- 每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="sJobTrigger_OneMinTrade" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sJobDetail_OneMinTrade" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0/1 * * * * ?</value>  <!-- 每1min执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_StatsHourlyForm" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_StatsHourlyForm" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_NStatsHourlyForm" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_NStatsHourlyForm" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_BfxBalanceCheck" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_BfxBalanceCheck" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>18 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_StatsAccount" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_StatsAccount" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 1 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_statisticsFee" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_statisticsFee" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>36 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_ReleaseLevelBuy" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_ReleaseLevelBuy" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>20 0 0 * * ?</value>  <!-- 每天执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_PledgeRate" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_PledgeRate" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>10 0 1 * * ?</value>  <!-- 每天执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_PledgeClose" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_PledgeClose" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>6 * * * * ?</value>  <!-- 每天执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_ReleaseIeo" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_ReleaseIeo" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>22 0 0 * * ?</value>  <!-- 每天执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_BakContractTable" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_BakContractTable" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>10 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="nJobTrigger_BakContractTable" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="nJobDetail_BakContractTable" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>10 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_BakTable" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_BakTable" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>20 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_BakSpotTable" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_BakSpotTable" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>30 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_BakVContractTable" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_BakVContractTable" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>40 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_BakDContractTable" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_BakDContractTable" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>50 0 0/1 * * ?</value>  <!-- 每1小时执行1次 -->
+		</property>
+	</bean>
+	<bean id="JobTrigger_StatisticsCredit" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_StatisticsCredit" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 0 * * ?</value>  <!-- 每天0点执行-->
+		</property>
+	</bean>
+	<bean id="JobTrigger_StatisticalForm" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_StatisticalForm" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 0 * * ?</value>  <!-- 每天0点执行-->
+		</property>
+	</bean>
+		<bean id="JobTrigger_NStatisticalForm" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_NStatisticalForm" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 0 * * ?</value>  <!-- 每天0点执行-->
+		</property>
+	</bean>
+	<bean id="JobTrigger_SpotStatsForm" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_SpotStatsForm" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 0 * * ?</value>  <!-- 每天0点执行-->
+		</property>
+	</bean>
+	<bean id="JobTrigger_RewardBft" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_RewardBft" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 0 * * ?</value>  <!-- 每天0点执行-->
+		</property>
+	</bean>
+	<bean id="JobTrigger_RecordComposite" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_RecordComposite" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 0 * * ?</value>  <!-- 每天0点执行-->
+		</property>
+	</bean>
+	<bean id="JobTrigger_Bonus" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_Bonus" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 0 12 * * ?</value>  <!-- 每天0点执行-->
+		</property>
+	</bean>
+	<bean id="JobTrigger_HoldCountStats" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="JobDetail_HoldCountStats" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>0 59 9 * * ?</value>  <!-- 每天10点执行-->
+		</property>
+	</bean>
+	<bean id="vTradeRankingTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="vTradeRankingDetail" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>12 0/5 * * * ?</value>  <!-- 每5分钟点执行-->
+		</property>
+	</bean>
+	<bean id="tradeRankingTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="tradeRankingDetail" />
+		</property>
+		<property name="cronExpression">  <!-- CronTrigger配置完整格式为： [秒] [分] [小时] [日] [月] [周] [年] -->
+			<value>9 0/5 * * * ?</value>  <!-- 每5分钟点执行-->
+		</property>
+	</bean>
+	<!-- JobDetail的配置 -->
+	<bean id="JobDetail_FindBPI" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="BPI" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nJobDetail_FindBPI" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nBPI" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_LmaxBPI" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="LmaxBPI" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_StockBPI" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="StockBPI" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nJobDetail_StockBPI" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nStockBPI" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_ExperiBPI" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="ExperiBPI" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_CompositeBPI" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="CompositeBPI" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_GetTicker" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="GetTicker" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_TickerApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="TickerApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nJobDetail_TickerApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nTickerApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dJobDetail_TickerApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dTickerApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vJobDetail_TickerApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vTickerApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="sJobDetail_TickerApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sTickerApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<!-- JobDetail的配置(开仓) -->
+	<bean id="openPositionQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="openPositionTimerTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nOpenPositionQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nOpenPosition" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<!-- JobDetail的配置(开仓) -->
+	<bean id="dOpenPositionQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dOpenPosition" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="planPendingToCacheJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="planPdToCache" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nPlanPendingToCacheJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nPlanPdToCache" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dPlanPdToCacheQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dPlanPdToCache" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vOpenPositionQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vOpenPosition" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vPlanPdToCacheQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vPlanPdToCache" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="userMonitorJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="userMonitorTimerTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nUserMonitorJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="NTimerTaskUserMonitor" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="spotOpenPositionJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="spotOpenPositionTimerTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="newTransactionQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="newTransactionTimerTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dAutoCreateDayDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dAutoCreateDay" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="getTradeDataQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="getTradeDateTop5" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nGetTradeDataQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nGetTradeDateTop5" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dGetTradeDataQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dGetTradeDateTop5" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vGetTradeDataQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vGetTradeDateTop5" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="sGetTradeDataQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sGetTradeDate" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="wesocketApiJsonDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="wesocketApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="klineWSApiJsonDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="klineWSApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="kdepthWSApiJsonDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="kdepthWSApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="pushWSApiJsonDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pushWSApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="openWsDepthV1Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="openWsDepth" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="openWsKlineV1Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="openWsKline" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="openWsTradeV1Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="openWsTrade" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="getStockDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="getStock" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="getFuturesDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="getFutures" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="getA50Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="getA50" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="stopLossQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="stopLossWinTimerTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nStopLossQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nStopLossWin" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dStopLossQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dStopLossWin" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vStopLossQuartzJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vStopLossWin" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_TradeApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="TradeApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nJobDetail_TradeApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nTradeApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dJobDetail_TradeApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dTradeApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vJobDetail_TradeApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vTradeApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="sJobDetail_TradeApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sTradeApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_DepthApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="DepthApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nJobDetail_DepthApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nDepthApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dJobDetail_DepthApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dDepthApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vJobDetail_DepthApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vDepthApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="sJobDetail_DepthApiJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sDepthApiJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_IncreaseJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="IncreaseJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nJobDetail_IncreaseJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nIncreaseJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dJobDetail_IncreaseJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dIncreaseJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vJobDetail_IncreaseJson" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vIncreaseJson" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="appendBailDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="appendBail" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="overFlowDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="overFlow" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nOverFlowDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nOverFlow" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dOverFlowDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dOverFlow" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vOverFlowDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vOverFlow" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="depthAdjustDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="depthAdjust" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nDepthAdjustDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nDepthAdjust" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dDepthAdjustDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dDepthAdjust" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vDepthAdjustDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vDepthAdjust" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="spotDepthAdjustDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sDepthAdjust" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="cancelQuantPendingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="cancelQuant" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nCancelQuantPendingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nCancelQuant" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="cancelSpotQuantPendingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="cancelSpotQuant" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="cancelDeliveryQuantPendingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="cancelDeliveryQuant" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="scalpingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="scalping" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nScalpingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nScalping" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="spotScalpingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="spotScalping" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dScalpingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dScalping" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vScalpingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vScalping" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="spotBTScalpingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="spotBTScalping" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="spotBTDepthJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="spotBTDepth" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="hedgingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="hedging" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nHedgingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nHedging" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dHedgingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dHedging" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="sHedgingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="spotHedging" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="hedgingBalanceJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="hedgingBalance" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dHedgingBalanceJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dHedgingBalance" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="sHedgingBalanceJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sHedgingBalance" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="outsideBalanceJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="outsideBalance" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="hedgingCheckJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="hedgingCheck" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nHedgingCheckJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nHedgingCheck" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dHedgingCheckJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dHedgingCheck" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="sHedgingCheckJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="spotHedgingCheck" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="checkOrderJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="checkOrder" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_BfcExchange" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="bfcExchange" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="fundingFeeJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="fundingFee" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nFundingFeeJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nFundingFee" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vFundingFeeJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vFundingFee" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_UsdRate" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="usdrate"/>
+		</property>
+		<property name="targetMethod">
+			<value>run</value>	
+		</property>
+		<property name="concurrent" value="true" />
+	</bean>
+	<bean id="JobDetail_CheckBalance" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="checkBalance"/>
+		</property>
+		<property name="targetMethod">
+			<value>run</value>	
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_OneMinTrade" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="oneMinTrade" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nJobDetail_OneMinTrade" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nOneMinTrade" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dJobDetail_OneMinTrade" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="dOneMinTrade" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vJobDetail_OneMinTrade" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vOneMinTrade" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="sJobDetail_OneMinTrade" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sOneMinTrade" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_StatsHourlyForm" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="statsHourlyForm" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_NStatsHourlyForm" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nStatsHourlyForm" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_BfxBalanceCheck" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="bfxBalanceCheck" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_StatsAccount" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="statsAccount" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_ReleaseLevelBuy" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="releaseLevelBuy" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_PledgeRate" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pledgeRate" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_PledgeClose" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="pledgeClose" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_ReleaseIeo" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="releaseIeo" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_BakTable" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="BakTable" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_BakContractTable" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="BakContractTable" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="nJobDetail_BakContractTable" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nBakContractTable" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_BakSpotTable" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="BakSpotTable" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_BakVContractTable" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="BakVContractTable" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_BakDContractTable" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="BakDContractTable" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_StatisticsCredit" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="statisticsCredit" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_StatisticalForm" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="statisticalForm" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_NStatisticalForm" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="nStatisticalForm" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_SpotStatsForm" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="spotStatsForm" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_RewardBft" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="rewardBft" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_RecordComposite" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="recordComposite" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_Bonus" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="bonus" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_HoldCountStats" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="holdCountStats" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="vTradeRankingDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="vTradeRanking" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="tradeRankingDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="tradeRanking" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="JobDetail_statisticsFee" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="statisticsFee" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<!--注册定时执行任务实体-->
+	<bean name="BPI" class="com.btc100.btc_q.timerTask.TimerTaskBPI" />								<!-- 比特币价格指数 -->
+	<bean name="StockBPI" class="com.btc100.btc_q.timerTask.TimerTaskStockBPI" />					<!-- 股指价格指数 -->
+	<bean name="nBPI" class="com.btc100.btc_q.timerTask.NTimerTaskBPI" />								<!-- 比特币价格指数 -->
+	<bean name="nStockBPI" class="com.btc100.btc_q.timerTask.NTimerTaskStockBPI" />					<!-- 股指价格指数 -->
+	<bean name="LmaxBPI" class="com.btc100.btc_q.timerTask.TimerTaskLmaxBPI" />						<!-- 股指价格指数 -->
+	<bean name="ExperiBPI" class="com.btc100.btc_q.timerTask.TimerTaskExperiBPI" />					<!-- 实验区价格指数 -->
+	<bean name="CompositeBPI" class="com.btc100.btc_q.timerTask.TimerTaskCompositeBPI" />			<!-- 综合指数价格指数 -->
+	<bean name="TickerApiJson" class="com.btc100.btc_q.timerTask.TimerTaskTickerJson" />			<!-- 行情API -->
+	<bean name="nTickerApiJson" class="com.btc100.btc_q.timerTask.NTimerTaskTickerJson" />			<!-- 行情API -->
+	<bean name="vTickerApiJson" class="com.btc100.btc_q.timerTask.VTimerTaskTickerJson" />			<!-- 模拟交易-行情API -->
+	<bean name="dTickerApiJson" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskTickerJson" />	<!-- 交割合约-行情API -->
+	<bean name="TradeApiJson" class="com.btc100.btc_q.timerTask.TimerTaskTradesJson" />				<!-- 交易历史API -->
+	<bean name="nTradeApiJson" class="com.btc100.btc_q.timerTask.NTimerTaskTradesJson" />				<!-- 交易历史API -->
+	<bean name="vTradeApiJson" class="com.btc100.btc_q.timerTask.VTimerTaskTradesJson" />			<!-- 模拟交易-交易历史API -->
+	<bean name="dTradeApiJson" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskTradesJson" />	<!-- 交割合约-交易历史API -->
+	<bean name="DepthApiJson" class="com.btc100.btc_q.timerTask.TimerTaskDepthJson" />				<!-- 市场深度API -->
+	<bean name="nDepthApiJson" class="com.btc100.btc_q.timerTask.NTimerTaskDepthJson" />				<!-- 市场深度API -->
+	<bean name="vDepthApiJson" class="com.btc100.btc_q.timerTask.VTimerTaskDepthJson" />			<!-- 模拟交易-市场深度API -->
+	<bean name="dDepthApiJson" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskDepthJson" />		<!-- 交割合约-市场深度API -->
+	<bean name="IncreaseJson" class="com.btc100.btc_q.timerTask.TimerTaskIncreaseJson" />			<!-- 市场增仓API -->
+	<bean name="nIncreaseJson" class="com.btc100.btc_q.timerTask.NTimerTaskIncreaseJson" />			<!-- 市场增仓API -->
+	<bean name="vIncreaseJson" class="com.btc100.btc_q.timerTask.VTimerTaskIncreaseJson" />			<!-- 模拟交易-市场增仓API -->
+	<bean name="dIncreaseJson" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskIncreaseJson" />	<!-- 交割合约-市场增仓API -->
+	<bean name="oneMinTrade" class="com.btc100.btc_q.timerTask.TimerTaskOneMinTrade" />				<!-- K线-1分钟数据 -->
+	<bean name="nOneMinTrade" class="com.btc100.btc_q.timerTask.NTimerTaskOneMinTrade" />				<!-- K线-1分钟数据 -->
+	<bean name="dOneMinTrade" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskOneMinTrade" />	<!-- 交割合约K线-1分钟数据 -->
+	<bean name="vOneMinTrade" class="com.btc100.btc_q.timerTask.VTimerTaskOneMinTrade" />			<!-- 模拟合约K线-1分钟数据 -->
+	<bean name="sOneMinTrade" class="com.btc100.btc_q.timerTask.SpotTimerTaskOneMinTrade" />		<!-- 币币交易K线-1分钟数据 -->
+	<bean name="recordComposite" class="com.btc100.btc_q.timerTask.TimerTaskRecordCompositeIndex" />		<!-- 合约-0点记录基准指数 -->
+	<bean name="statisticsCredit" class="com.btc100.btc_q.timerTask.TimerTaskStatisticsCredit" />	<!-- 开仓积分统计 -->
+	<bean name="statisticalForm" class="com.btc100.btc_q.timerTask.TimerTaskStatisticalForm" />		<!-- 每日零点报表统计 -->
+	<bean name="nStatisticalForm" class="com.btc100.btc_q.timerTask.NTimerTaskStatisticalForm" />	<!-- 每日零点报表统计 -->
+	<bean name="spotStatsForm" class="com.btc100.btc_q.timerTask.SpotTimerTaskStatisticalForm" />	<!-- 每日零点报表统计 -->
+	<bean name="statsHourlyForm" class="com.btc100.btc_q.timerTask.TimerTaskStatsHourlyForm" />		<!-- 每小时报表统计 -->
+	<bean name="nStatsHourlyForm" class="com.btc100.btc_q.timerTask.NTimerTaskStatsHourlyForm" />	<!-- 每小时报表统计 -->
+	<bean name="bfxBalanceCheck" class="com.btc100.btc_q.timerTask.TimerTaskBfxBalanceCheck" />		<!-- 每小时统计用户最少Btcside持仓 -->
+	<bean name="appendBail" class="com.btc100.btc_q.timerTask.TimerTaskAppendBail" />				<!-- 自动添加保证金 -->
+	<bean name="overFlow" class="com.btc100.btc_q.timerTask.TimerTaskOverFlow" />					<!-- 爆仓 -->
+	<bean name="nOverFlow" class="com.btc100.btc_q.timerTask.NTimerTaskOverFlow" />					<!-- 爆仓 -->
+	<bean name="dOverFlow" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskOverFlow" />			<!-- 交割合约-爆仓 -->
+	<bean name="dAutoCreateDay" class="com.btc100.btc_q.timerTask.DeliveryAutoCreateDayTransaction" />		<!-- 交割合约-交割结算 -->
+	<bean name="usdrate" class="com.btc100.btc_q.timerTask.ChangeUsdRateTimerTask"/>				<!-- 汇率 -->
+	<bean name="depthAdjust" class="com.btc100.btc_q.timerTask.TimerTaskDepthAdjust" />				<!-- 市场深度调整 -->
+	<bean name="nDepthAdjust" class="com.btc100.btc_q.timerTask.NTimerTaskDepthAdjust" />				<!-- 市场深度调整 -->
+	<bean name="scalping" class="com.btc100.btc_q.timerTask.TimerTaskScalping" />					<!-- 刷单 -->
+	<bean name="nScalping" class="com.btc100.btc_q.timerTask.NTimerTaskScalping" />					<!-- 刷单 -->
+	<bean name="spotScalping" class="com.btc100.btc_q.timerTask.SpotTimerTaskScalping" />			<!-- 币币-刷单 -->
+	<bean name="cancelQuant" class="com.btc100.btc_q.timerTask.TimerTaskCancelQuantPending" />		<!-- 撤销量化单 -->
+	<bean name="nCancelQuant" class="com.btc100.btc_q.timerTask.NTimerTaskCancelQuantPending" />		<!-- 撤销量化单 -->
+	<bean name="cancelDeliveryQuant" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskCancelQuantPending" />		<!-- 交割合约-撤销量化单 -->
+	<bean name="fundingFee" class="com.btc100.btc_q.timerTask.TimerTaskFundingFee" />				<!-- 资金费 -->
+	<bean name="nFundingFee" class="com.btc100.btc_q.timerTask.NTimerTaskFundingFee" />				<!-- 资金费 -->
+	<bean name="vFundingFee" class="com.btc100.btc_q.timerTask.VTimerTaskFundingFee" />				<!-- 资金费 -->
+	<bean name="hedging" class="com.btc100.btc_q.timerTask.TimerTaskHedging" />						<!-- 外部市场对冲 -->
+	<bean name="nHedging" class="com.btc100.btc_q.timerTask.NTimerTaskHedging" />						<!-- 外部市场对冲 -->
+	<bean name="hedgingBalance" class="com.btc100.btc_q.timerTask.TimerTaskHedgingBalance" />		<!-- 对冲账户余额 -->
+	<bean name="outsideBalance" class="com.btc100.btc_q.timerTask.TimerTaskOutsideBalance" />		<!-- 外部市场账户余额 -->
+	<bean name="hedgingCheck" class="com.btc100.btc_q.timerTask.TimerTaskHedgingCheck" />			<!-- 对冲失败检查 -->
+	<bean name="nHedgingCheck" class="com.btc100.btc_q.timerTask.NTimerTaskHedgingCheck" />			<!-- 对冲失败检查 -->
+	<bean name="checkOrder" class="com.btc100.btc_q.timerTask.TimerTaskCheckOrder" />				<!-- 外部市场对冲订单查询 -->
+	<bean name="bfcExchange" class="com.btc100.btc_q.timerTask.TimerTaskBfcExchange" />				<!-- BFC与Btcside互兑处理 -->
+	<bean name="GetTicker" class="com.btc100.btc_q.timerTask.TimerTaskGetTicker" />					<!-- 火币聚合行情（买一/卖一） -->
+	<bean name="bonus" class="com.btc100.btc_q.timerTask.TimerTaskBonus" />							<!-- 平台分红 -->
+	<bean name="statsAccount" class="com.btc100.btc_q.timerTask.TimerTaskStatsAccount" />			<!-- 整点统计用户账户 -->
+	<bean name="releaseLevelBuy" class="com.btc100.btc_q.timerTask.TimerTaskReleaseLevelBuy" />		<!-- 整点解锁Vip购买Btcside锁仓 -->
+	<bean name="pledgeRate" class="com.btc100.btc_q.timerTask.LoanPledgeRateTimerTask" />			<!-- 质押借币补仓通知 -->
+	<bean name="pledgeClose" class="com.btc100.btc_q.timerTask.LoanCloseTimerTask" />				<!-- 质押借币平仓 -->
+	<bean name="releaseIeo" class="com.btc100.btc_q.timerTask.IEOReleaseTimerTask" />				<!-- 整点解锁IEO -->
+	<bean name="rewardBft" class="com.btc100.btc_q.timerTask.TimerTaskRewardBft" />					<!-- 零点赠送BFT -->
+	<bean name="vOverFlow" class="com.btc100.btc_q.timerTask.VTimerTaskOverFlow" />					<!-- 模拟交易-爆仓 -->
+	<bean name="dDepthAdjust" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskDepthAdjust" />			<!-- 交割合约 -市场深度调整 -->
+	<bean name="vDepthAdjust" class="com.btc100.btc_q.timerTask.VTimerTaskDepthAdjust" />			<!-- 模拟交易-市场深度调整 -->
+	<bean name="dScalping" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskScalping" />					<!-- 交割合约-刷单 -->
+	<bean name="vScalping" class="com.btc100.btc_q.timerTask.VTimerTaskScalping" />					<!-- 模拟交易-刷单 -->
+	<bean name="nOpenPosition" class="com.btc100.btc_q.timerTask.NOpenPositionTimerTask" />			<!-- 交割合约-交易 -->
+	<bean name="dOpenPosition" class="com.btc100.btc_q.timerTask.DeliveryOpenPositionTimerTask" />			<!-- 交割合约-交易 -->
+	<bean name="vOpenPosition" class="com.btc100.btc_q.timerTask.VOpenPositionTimerTask" />			<!-- 模拟交易-交易 -->
+	<bean name="dPlanPdToCache" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskPlanPendingToCache" />	<!-- 交割合约-计划委托转cache -->
+	<bean name="vPlanPdToCache" class="com.btc100.btc_q.timerTask.VTimerTaskPlanPendingToCache" />	<!-- 模拟交易-计划委托转cache -->
+	<bean name="nStopLossWin" class="com.btc100.btc_q.timerTask.NStopLossWinTimerTask" />			<!-- 模拟交易-止盈止损 -->
+	<bean name="vStopLossWin" class="com.btc100.btc_q.timerTask.VStopLossWinTimerTask" />			<!-- 模拟交易-止盈止损 -->
+	<bean name="dStopLossWin" class="com.btc100.btc_q.timerTask.DeliveryStopLossWinTimerTask" />			<!-- 交割合约-止盈止损 -->
+	<bean name="vTradeRanking" class="com.btc100.btc_q.timerTask.VTimerTaskTradeRanking" />			<!-- 模拟交易排名-10秒 -->
+	<bean name="dGetTradeDateTop5" class="com.btc100.btc_q.timerTask.DeliveryGetTradeDateTop5" />			<!-- 交割合约-深度 -->
+	<bean name="nGetTradeDateTop5" class="com.btc100.btc_q.timerTask.NGetTradeDateTop5"/>					<!-- 分区合约-深度 -->
+	<bean name="vGetTradeDateTop5" class="com.btc100.btc_q.timerTask.VGetTradeDateTop5" />			<!-- 模拟交易-深度 -->
+	<bean name="sTickerApiJson" class="com.btc100.btc_q.timerTask.SpotTimerTaskTickerJson" />		<!-- 币币交易-行情API -->
+	<bean name="sTradeApiJson" class="com.btc100.btc_q.timerTask.SpotTimerTaskTradesJson" />		<!-- 币币交易-交易历史API -->
+	<bean name="sDepthApiJson" class="com.btc100.btc_q.timerTask.SpotTimerTaskDepthJson" />			<!-- 币币交易-市场深度API -->
+	<bean name="sGetTradeDate" class="com.btc100.btc_q.timerTask.SpotGetTradeDateTop5" />			<!-- 币币交易-获取交易页面缓存 -->
+	<bean name="sDepthAdjust" class="com.btc100.btc_q.timerTask.SpotTimerTaskDepthAdjust" />		<!-- 币币交易-市场深度调整 -->
+	<bean name="dHedging" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskHedging" />		        	<!-- 交割合约-外部市场对冲 -->
+	<bean name="dHedgingCheck" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskHedgingCheck" />			<!-- 交割合约-对冲失败检查 -->
+	<bean name="dHedgingBalance" class="com.btc100.btc_q.timerTask.DeliveryTimerTaskHedgingBalance" />		<!-- 交割合约-对冲账户余额 -->
+	<bean name="spotHedging" class="com.btc100.btc_q.timerTask.SpotTimerTaskHedging" />		        <!-- 币币-外部市场对冲 -->
+	<bean name="spotHedgingCheck" class="com.btc100.btc_q.timerTask.SpotTimerTaskHedgingCheck" />		<!-- 币币-对冲失败检查 -->
+	<bean name="sHedgingBalance" class="com.btc100.btc_q.timerTask.SpotTimerTaskHedgingBalance" />		<!-- 币币-对冲账户余额 -->
+	<bean name="cancelSpotQuant" class="com.btc100.btc_q.timerTask.TimerTaskCancelSpotQuantPending" />	<!-- 撤销量化单 -->
+	<bean name="getA50" class="com.btc100.btc_q.timerTask.TimerTaskGetA50Ticker" />					<!-- WebSocket客户端获取 A50数据 -->
+	<bean name="getStock" class="com.btc100.btc_q.timerTask.TimerTaskGetStockTicker" />				<!-- WebSocket客户端获取 股指数据 -->
+	<bean name="getFutures" class="com.btc100.btc_q.timerTask.TimerTaskGetStockFuturesTicker" />				<!-- WebSocket客户端获取 股指数据 -->
+	<bean name="tradeRanking" class="com.btc100.btc_q.timerTask.TimerTaskTradeRanking" />			<!-- 返佣榜和盈利榜-->
+	<bean name="planPdToCache" class="com.btc100.btc_q.timerTask.TimerTaskPlanPendingToCache" />			<!-- 返佣榜和盈利榜-->
+	<bean name="nPlanPdToCache" class="com.btc100.btc_q.timerTask.NTimerTaskPlanPendingToCache" />			<!-- 返佣榜和盈利榜-->
+	<bean name="holdCountStats" class="com.btc100.btc_q.timerTask.TimerTaskDataBroadCast" />		<!-- 每天10点持仓数据播报 -->
+	<bean name="BakTable" class="com.btc100.btc_q.timerTask.TimerTaskBakTable" />           		<!-- 每隔1小时备份数据库 -->
+	<bean name="BakContractTable" class="com.btc100.btc_q.timerTask.TimerTaskBakContractTable" />	<!-- 每隔1小时备份数据库 -->
+	<bean name="nBakContractTable" class="com.btc100.btc_q.timerTask.NTimerTaskBakContractTable" />	<!-- 每隔1小时备份数据库 -->
+	<bean name="BakSpotTable" class="com.btc100.btc_q.timerTask.TimerTaskBakSpotTable" />			<!-- 每隔1小时备份数据库 -->
+	<bean name="BakVContractTable" class="com.btc100.btc_q.timerTask.TimerTaskBakVTable" />			<!-- 每隔1小时备份数据库 -->
+	<bean name="BakDContractTable" class="com.btc100.btc_q.timerTask.TimerTaskBakDTable" />			<!-- 交割-每隔1小时备份数据库 -->
+	<bean name="wesocketApiJson" class="com.btc100.btc_q.timerTask.ws.TimerTaskWebsocketApi" />		<!-- WebSocket API数据 -->
+	<bean name="klineWSApiJson" class="com.btc100.btc_q.timerTask.ws.TimerTaskKLineWebsocketApi" />	<!-- WebSocket API数据 -->
+	<bean name="kdepthWSApiJson" class="com.btc100.btc_q.timerTask.ws.TimerTaskDepthWebsocketApi" />	<!-- WebSocket API数据 -->
+	<bean name="pushWSApiJson" class="com.btc100.btc_q.timerTask.ws.TimerTaskPushWebsocketApi" />		<!-- WebSocket API数据 -->
+	<bean name="openWsDepth" class="com.btc100.btc_q.timerTask.openws.v1.TimerTaskOpenWsDepthV1" />			<!-- Open ws 深度数据推送 -->
+	<bean name="openWsKline" class="com.btc100.btc_q.timerTask.openws.v1.TimerTaskOpenWsKlineV1" />			<!-- Open ws K线数据推送 -->
+	<bean name="openWsTrade" class="com.btc100.btc_q.timerTask.openws.v1.TimerTaskOpenWsTradeV1" />			<!-- Open ws 交易数据推送 -->
+	<bean name="statisticsFee" class="com.btc100.btc_q.timerTask.TimerTaskStatisticsFee" />			<!-- 每隔一个小时统计用户的手续费和可抽取次数-->
+	
+	<bean name="checkBalance" class="com.btc100.btc_q.timerTask.CheckBalanceTimerTask"/>					<!-- 余额检测 -->
+	
+	
+	<bean name="spotBTDepth" class="com.btc100.btc_q.timerTask.SpotTimerTaskBetterToken"/>		<!-- BetterToken刷单 -->
+	<bean name="spotBTScalping" class="com.btc100.btc_q.timerTask.SpotTimerTaskBetterTokenScalping"/>		<!-- BetterToken刷单 -->
+</beans>

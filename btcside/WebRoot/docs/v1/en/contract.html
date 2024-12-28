@@ -1,0 +1,3869 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="./../images/favicon.ico" rel="icon" type="image/ico">
+    <title>Btcside API Reference</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="./../stylesheets/screen.css" rel="stylesheet" media="screen">
+    <link href="./../stylesheets/print.css" rel="stylesheet" media="print">
+      <script src="./../javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        <img src="./../images/navbar.png" alt="Navbar">
+      </span>
+    </a>
+    <header>
+      <div class="flex_box">
+        <img src="./../images/Btcside.png" class="logo" style="width: 172px;height: 36px;" alt="Logo">
+        <div class="nav_box">
+          <span class="nav_cell nav_tab" style="margin-left: 27px;">
+            <a href="./contract.html" id="btn_dm" class="">Contract API</a>
+          </span>
+          <span class="nav_cell nav_tab">
+            <a href="./spot.html" id="btn_spot" class="">Spot API</a>
+          </span>
+        </div>
+      </div>
+      <a href="./../contract.html" class="lang" id="lang_box" style="display: block;">中文</a>
+    </header>
+    <div class="toc-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell" class="active">shell</a>
+        </div>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#5ea2e0cde2" class="toc-h1 toc-link active" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2 active" style="display: block;">
+                  <li>
+                    <a href="#api" class="toc-h2 toc-link" data-title="API Introduction">API Introduction</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#185368440e" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
+          </li>
+          <li>
+            <a href="#2d07d50c97" class="toc-h1 toc-link" data-title="Access Instructions">Access Instructions</a>
+              <ul class="toc-list-h2" style="display: none;">
+                  <li>
+                    <a href="#urls" class="toc-h2 toc-link" data-title="Access URLs">Access URLs</a>
+                  </li>
+                  <li>
+                    <a href="#c1fd2fc5ac" class="toc-h2 toc-link" data-title="Rate Limiting Rule">Rate Limiting Rule</a>
+                  </li>
+                  <li>
+                    <a href="#c64cd15fdc" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#21d67c3c4c" class="toc-h2 toc-link" data-title="Request Format">Request Format</a>
+                  </li>
+                  <li>
+                    <a href="#dac673286f" class="toc-h2 toc-link" data-title="Response Format">Response Format</a>
+                  </li>
+                  <li>
+                    <a href="#a38a81c9d5" class="toc-h2 toc-link" data-title="Error Message">Error Message</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#41654e0268" class="toc-h1 toc-link" data-title="Reference Data">Reference Data</a>
+              <ul class="toc-list-h2" style="display: none;">
+                  <li>
+                    <a href="#symbols" class="toc-h2 toc-link" data-title="Get All Contract Names And Precision">Get All Contract Names And Precision</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#d9d514d202" class="toc-h1 toc-link" data-title="Market Data">Market Data</a>
+              <ul class="toc-list-h2" style="display: none;">
+                  <li>
+                    <a href="#k" class="toc-h2 toc-link" data-title="Get Klines(Candles)">Get Klines(Candles)</a>
+                  </li>
+                  <li>
+                    <a href="#ticker" class="toc-h2 toc-link" data-title="Get Market Information (Ticker)">Get Market Information (Ticker)</a>
+                  </li>
+                  <li>
+                    <a href="#tickers" class="toc-h2 toc-link" data-title="Get All The Market Information (Tickers)">Get All The Market Information (Tickers)</a>
+                  </li>
+                  <li>
+                    <a href="#0f7bd4961a" class="toc-h2 toc-link" data-title="Get Market Depth">Get Market Depth</a>
+                  </li>
+                  <li>
+                    <a href="#trades" class="toc-h2 toc-link" data-title="Get Contract History">Get Contract History</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#2a0d0be224" class="toc-h1 toc-link" data-title="Account">Account</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#accounts" class="toc-h2 toc-link" data-title="Query All Contract Assets">Query All Contract Assets</a>
+                  </li>
+                  <li>
+                    <a href="#account" class="toc-h2 toc-link" data-title="Query Single Currency Assets">Query Single Currency Assets</a>
+                  </li>
+                  <li>
+                    <a href="#transfer" class="toc-h2 toc-link" data-title="Transfer Asset (Between currency and contract)">Transfer Asset (Between currency and contract)</a>
+                  </li>
+                  <li>
+                    <a href="#612d7943b6-records" class="toc-h2 toc-link" data-title="Transfer Fund History Query">Transfer Fund History Query</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#4832b46474" class="toc-h1 toc-link" data-title="Contract Trade Interface">Contract Trade Interface</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#fd6ce2a756-place" class="toc-h2 toc-link" data-title="Place A New Order">Place A New Order</a>
+                  </li>
+                  <li>
+                    <a href="#fd6ce2a756-positions-close" class="toc-h2 toc-link" data-title="Place Close Order">Place Close Order</a>
+                  </li>
+                  <li>
+                    <a href="#fd6ce2a756-positions" class="toc-h2 toc-link" data-title="Contract Position Query">Contract Position Query</a>
+                  </li>
+                  <li>
+                    <a href="#4e53c0fccd-cancel" class="toc-h2 toc-link" data-title="Cancel Order">Cancel Order</a>
+                  </li>
+                  <li>
+                    <a href="#open-orders-batchCancel" class="toc-h2 toc-link" data-title="Submit Cancel for Multiple Orders by IDs">Submit Cancel for Multiple Orders by IDs</a>
+                  </li>
+                  <li>
+                    <a href="#92d59b6aad" class="toc-h2 toc-link" data-title="Get the Order Detail of an Order">Get the Order Detail of an Order</a>
+                  </li>
+                  <li>
+                    <a href="#92d59b6aad-orders" class="toc-h2 toc-link" data-title="Query Current Pending Orders">Query Current Pending Orders</a>
+                  </li>
+                  <li>
+                    <a href="#92d59b6aad-tradeApi-historyOrders" class="toc-h2 toc-link" data-title="Query History Order">Query History Order</a>
+                  </li>
+                  <li>
+                    <a href="#92d59b6aad-tradeApi-trades" class="toc-h2 toc-link" data-title="Query Transaction Records">Query Transaction Records</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#websocket" class="toc-h1 toc-link" data-title="Websocket Market Data">Websocket Market Data</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#5ea2e0cde2-2" class="toc-h2 toc-link" data-title="Introduction">Introduction</a>
+                  </li>
+                  <li>
+                    <a href="#k-2" class="toc-h2 toc-link" data-title="Market Candlestick">Market Candlestick</a>
+                  </li>
+                  <li>
+                    <a href="#8742b7d9f7" class="toc-h2 toc-link" data-title="Market Depth">Market Depth</a>
+                  </li>
+                  <li>
+                    <a href="#56c6c47284-2" class="toc-h2 toc-link" data-title="Trade Detail">Trade Detail</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href="http://app.Btcside.com/center/bindAppKey.do">Sign Up for a Btcside API key</a></li>
+            <li>Login is required for creating an API key</li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="5ea2e0cde2">Introduction</h1><h2 id="api">API Introduction</h2>
+<p>Welcome to the Btcside API! You can use this API to get market data, trade, and manage your account.</p>
+
+<p>On the right side of the document is the code example, which we currently only provide for the <code>shell</code>.</p>
+
+<p>You can use the following link to switch between old API documents:</p>
+<p><a href="http://app.Btcside.com/news/other.do">http://app.Btcside.com/news/other.do</a></p>
+<h1 id="185368440e">Change Log</h1>
+<table><thead>
+<tr>
+<th>Release Time (Beijing Time UTC +8)</th>
+<th>API</th>
+<th>New / Update</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>2019.12.20 16:00</td>
+<td>Btcside Contract API English Reference</td>
+<td>New</td>
+<td>Added Contract API English Reference</td>
+</tr>
+<tr>
+<td>2019.12.03 16:50</td>
+<td>Websocket market.$type.$symbol.trade</td>
+<td>Update</td>
+<td>Push messages add subscription addresses and timestamps</td>
+</tr>
+<tr>
+<td>2019.11.01 19:00</td>
+<td>GET /v1/history/orders.do</td>
+<td>Update</td>
+<td>Added the "state" return field to indicate the order status</td>
+</tr>
+<tr>
+<td>2019.10.12 16:00</td>
+<td>Btcside Contract API Chinese Reference</td>
+<td>New</td>
+<td>Added Contract API Chinese Reference</td>
+</tr>
+
+</tbody></table>
+<h1 id="2d07d50c97">Access Instructions</h1><h2 id="urls">Access URLs</h2>
+<p><strong>REST API</strong></p>
+
+<p><strong><code>http://app.Btcside.com/</code></strong></p>
+
+<p><strong>Websocket Feed (market)</strong></p>
+
+<p><strong><code>wss://app.Btcside.com/v1/ws</code></strong></p>
+
+<aside class="notice">
+It is not recommended to use proxy to access Btcside API because it will introduce high latency and low stability.
+</aside>
+<h2 id="c1fd2fc5ac">Rate Limiting Rule</h2>
+<ul>
+<li>Contract: Each API Key is limited to 100 times per 10 seconds</li>
+</ul>
+
+<aside class="notice">
+The single API key dimension is limited. The market API access does not need to be signed.
+</aside>
+<h2 id="c64cd15fdc">Authentication</h2><h3 id="34addae335">Overview</h3>
+<p>The API request may be tampered during internet, therefore all private API must be signed by your API Key (Secrete Key).</p>
+<p>Each API Key has permission property, please check the API permission, and make sure your API key has proper permission.</p>
+
+<p>A valid request consists of below parts:</p>
+
+<ul>
+<li><p>API Path: http://app.Btcside.com, for example: http://app.Btcside.com/v1/account/accounts.do.</p></li>
+<li><p>API Access Key: The 'Access Key' in your API Key.</p></li>
+
+<li><p>Timestamp: Second Timestamps, Please make sure that the time stamp and Internet time do not differ too much.</p></li>
+<li><p>Required and optional parameters: each request has required and optional parameters. Please refer to API interface description.</p></li>
+<li><p>Signature: The value calculated by the signature to ensure that the signature is valid and has not been tampered with.</p></li>
+<li><p>Parameter transfer method: please use formdata to transfer parameters and set user agent in header.</p></li>
+<li><p>User-Agent settings in Header: <br>"Content-Type": "application/x-www-form-urlencoded",<br>"User-Agent":
+ "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like 
+Gecko) Chrome/50.0.2661.102 UBrowser/6.0.1471.813 Safari/537.36"</p></li>
+</ul>
+<h3 id="api-key">Create API Key</h3>
+<p>You can be here <a href="http://app.Btcside.com/center/bindAppKey.do">http://app.Btcside.com/center/bindAppKey.do</a> Create API Key. </p>
+
+<p>API Key includes the following two parts:</p>
+
+<ul>
+<li><p><code>AppKey:</code>  It is used in API request</p></li>
+<li><p><code>AppSecret:</code>  It is used to generate the signature (only visible once after creation)</p></li>
+</ul>
+
+<aside class="notice">
+The API Key can bind one or more IP addresses, we strongly suggest you bind IP address for security purpose. The API Key without IP binding will be expired after 90 days.
+</aside>
+
+<aside class="notice">
+Appkey has all operation rights including transaction and withdrawal currency. 
+</aside>
+
+<aside class="warning">
+<b>Warning</b>: These two keys are important to your account safety, please don't share <b>both</b> of them together to anyone else. If you find your API Key is disposed, please remove it immediately.
+</aside>
+<h3 id="1fbac240b7">Signature Method</h3>
+<p>Normative request for Signature calculation Different contents will get totally different results when use MD5 to calculate Signature, therefore, please normalize the requests before doing Signature calculation. Take the request of inquering order details as an example:</p>
+
+<p>query details of one order</p>
+
+<p><code>http://app.Btcside.com/v1/trade/order.do?</code></p>
+
+<p><code>AppKey=8e9e4b10413f49f682001c530beea232</code></p>
+
+<p><code>&amp;Timestamp=1568189479</code></p>
+
+<p><code>&amp;orderId=1082752</code></p>
+
+<p><code>&amp;symbol=Btcsideusdt</code></p>
+
+<p><code>&amp;Signature=a49c6053d05826f29356b189e1200f2a</code></p>
+
+<h4 id="1-ascii">1. Generation of signature parameter: sort all other parameter names in ASCII order, and splice parameter values and parameter names together. For example below is the original parameters:</h4>
+<p><code>Timestamp=1568189479</code></p>
+
+<p><code>symbol=Btcsideusdt</code></p>
+
+<p><code>orderId=1082752</code></p>
+
+<p><code>AppKey=8e9e4b10413f49f682001c530beea232</code></p>
+
+<aside class="notice">
+Use UTF-8 encoding and URI encoded. For example, The semicolon ':' should be encoded as '%3A', The space should be encoded as '%20'.
+</aside>
+
+<aside class="notice">
+Timestamp: Second Timestamps. Please make sure that the time stamp and Internet time do not differ too much. 
+</aside>
+<h4 id="2">2. Sorted by parameter name: </h4>
+<p><code>AppKey=8e9e4b10413f49f682001c530beea232</code></p>
+
+<p><code>Timestamp=1568189479</code></p>
+
+<p><code>orderId=1082752</code></p>
+
+<p><code>symbol=Btcsideusdt</code></p>
+<h4 id="3-amp">3. According to the above order, after splicing parameter name and parameter value: </h4>
+<p><code>AppKey8e9e4b10413f49f682001c530beea232Timestamp1568189479orderId1082752symbolBtcsideusdt</code></p>
+<h4 id="4">4. Add appsecret (for example, appsecret: 7c304b6b86f8403abc8091720a2415f2) to the above assembled string before and after, and encode UTF-8. Use MD5 algorithm to summarize the encoded byte stream: </h4>
+<p><code>MD5(7c304b6b86f8403abc8091720a2415f2AppKey8e9e4b10413f49f682001c530beea232<br>Timestamp1568189479orderId1082752symbolBtcsideusdt7c304b6b86f8403abc8091720a2415f2)</code></p>
+
+<p><code>Signature result of hexadecimal string obtained: a49c6053d05826f29356b189e1200f2a</code></p>
+<h4 id="5">5. Add the above signature value to the API request as the value of the parameter signature: </h4>
+<p>Finally, the API request sent to the server should be:</p>
+
+<p><code>http://app.Btcside.com/v1/trade/order.do?AppKey=8e9e4b10413f49f682001c530beea232&amp;Timestamp=1568189479&amp;orderId=1082752&amp;symbol=Btcsideusdt&amp;Signature=a49c6053d05826f29356b189e1200f2a</code></p>
+
+<ol>
+<li><p>Add all required authentication parameters to the path parameters of the interface call.</p></li>
+<li><p>Add the digital signature to the path parameter after the URL is encoded. The parameter is called "signature". </p></li>
+</ol>
+<h2 id="21d67c3c4c">Request Format</h2>
+<ol>
+<li><p>All API requests are sent in the form of get or post. </p></li>
+<li><p>Please use FormData to transfer parameters and set User-Agent in Header: <br>"Content-Type": "application/x-www-form-urlencoded",<br>"User-Agent":
+ "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like 
+Gecko) Chrome/50.0.2661.102 UBrowser/6.0.1471.813 Safari/537.36"</p></li>
+</ol>
+<h2 id="dac673286f">Response Format</h2>
+<p>The response is JSON format.There are three fields in the top level: "code", "data", and "msg". The business data is is under data field. </p>
+<h3 id="d9618612cd">Return Content Format</h3>
+<blockquote>
+<p>The returned content will be in the following format:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">per</span><span class="w"> </span><span class="err">API</span><span class="w"> </span><span class="err">response</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">nested</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">object</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>int</td>
+<td>Error code (0- success, others - failure)</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Error message (when code=0 succeeds, this parameter is "")</td>
+</tr>
+
+<tr>
+<td>data</td>
+<td>array</td>
+<td>Interface returns the data body (no value on failure)</td>
+</tr>
+</tbody></table>
+<h2 id="a38a81c9d5">Error Message</h2><h3 id="api-2">General status code description</h3>
+<table><thead>
+<tr>
+<th>Error Message</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code: 10000</td>
+<td>Other errors (MSG returns specific error message)</td>
+</tr>
+<tr>
+<td>Code: 10001</td>
+<td>Wrong parameters submitted</td>
+</tr>
+<tr>
+<td>Code: 10020</td>
+<td>Token invalid or error, need to login again</td>
+</tr>
+</tbody></table>
+
+<p>Code: Other error codes (MSG returns specific error message)</p>
+
+<h1 id="41654e0268">Reference Data</h1>
+<h2 id="symbols">Get All Contract Names And Precision</h2>
+<p>This interface returns the contract name and precision supported by all platforms.</p>
+<h3 id="http-symbols">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/common/symbols.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/common/symbols.do?type=contract"</span>
+</code></pre>
+<h3 id="1f9ac54b15-symbols">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"showName"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiples"</span><span class="p">:</span><span class="s2">"20"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pricePrecision"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amountPrecision"</span><span class="p">:</span><span class="mf">2</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"eth"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"showName"</span><span class="p">:</span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiples"</span><span class="p">:</span><span class="s2">"20"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pricePrecision"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amountPrecision"</span><span class="p">:</span><span class="mi">2</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-symbols">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>showName</td>
+<td>string</td>
+<td>Show Name</td>
+</tr>
+<tr>
+<td>multiples</td>
+<td>string</td>
+<td>Supported multiples, separated by ","</td>
+</tr>
+<tr>
+<td>pricePrecision</td>
+<td>integer</td>
+<td>Quote currency precision when quote price(decimal places)</td>
+</tr>
+<tr>
+<td>amountPrecision</td>
+<td>integer</td>
+<td>Base currency precision when quote amount(decimal places)</td>
+</tr>
+</tbody></table>
+<h1 id="d9d514d202">Market Data</h1>
+<h2 id="k">Get Klines(Candles)</h2>
+<p>This endpoint retrieves all klines in a specific range.</p>
+<h3 id="http-4">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/market/kline.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/market/kline.do?symbol=btc&amp;interval=15min&amp;type=contract"</span>
+</code></pre>
+<h3 id="1f9ac54b15-4">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>interval</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Kline Period</td>
+<td>1min, 3min, 5min, See below for details</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">Interval Value Range: <br>1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, <br>12hour, 1day</aside>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"first"</span><span class="p">:</span><span class="mi">10205.58</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"high"</span><span class="p">:</span><span class="mi">10210.01</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last"</span><span class="p">:</span><span class="mi">10192.18</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"low"</span><span class="p">:</span><span class="mf">10190.28</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"time"</span><span class="p">:</span><span class="mi">1568705400</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"vol"</span><span class="p">:</span><span class="mf">23.23</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Contract Type</td>
+</tr>
+<tr>
+<td>first</td>
+<td>float</td>
+<td>The opening price</td>
+</tr>
+<tr>
+<td>high</td>
+<td>float</td>
+<td>The high price</td>
+</tr>
+<tr>
+<td>last</td>
+<td>float</td>
+<td>The closing price</td>
+</tr>
+<tr>
+<td>low</td>
+<td>float</td>
+<td>The low price</td>
+</tr>
+<tr>
+<td>time</td>
+<td>long</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>vol</td>
+<td>float</td>
+<td>The trading volume in base currency of last 24 hours</td>
+</tr>
+</tbody></table>
+<h2 id="ticker">Get Market Information (Ticker)</h2>
+<p>This interface returns the contract market situation (Ticker), last price, high price, low price, trading volume, best bid and best ask.</p>
+<h3 id="http-ticker">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/market/ticker.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/market/ticker.do?symbol=btc&amp;type=contract"</span>
+</code></pre>
+<h3 id="1f9ac54b15-ticker">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"buy"</span><span class="p">:</span><span class="mi">10191.65</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sell"</span><span class="p">:</span><span class="mi">10193.72</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"high"</span><span class="p">:</span><span class="mi">10268.48</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last"</span><span class="p">:</span><span class="mi">10192.5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"low"</span><span class="p">:</span><span class="mf">10141.53</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"trades"</span><span class="p">:</span><span class="mi">50584730.78</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"vol"</span><span class="p">:</span><span class="mf">4954.56</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-ticker">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>buy</td>
+<td>float</td>
+<td>Best bid</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>float</td>
+<td>Best ask</td>
+</tr>
+<tr>
+<td>high</td>
+<td>float</td>
+<td>The high price</td>
+</tr>
+<tr>
+<td>last</td>
+<td>float</td>
+<td>The last price</td>
+</tr>
+<tr>
+<td>low</td>
+<td>float</td>
+<td>The low price</td>
+</tr>
+<tr>
+<td>trades</td>
+<td>float</td>
+<td>Aggregated trading value (in quote currency)</td>
+</tr>
+<tr>
+<td>vol</td>
+<td>float</td>
+<td>The trading volume in base currency of last 24 hours</td>
+</tr>
+</tbody></table>
+<h2 id="tickers">Get All The Market Information (Tickers)</h2>
+<p>This interface returns all contract market quotations (Tickers), last price, high price, low price, trading volume, best bid and best ask.</p>
+<h3 id="http-tickers">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/market/tickers.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/market/tickers.do?type=contract"</span>
+</code></pre>
+<h3 id="1f9ac54b15-tickers">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"change"</span><span class="p">:</span><span class="s2">"-1.75"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"buy"</span><span class="p">:</span><span class="mi">10195.79</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sell"</span><span class="p">:</span><span class="mi">10197.88</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"high"</span><span class="p">:</span><span class="mi">10268.48</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last"</span><span class="p">:</span><span class="mi">10196.55</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"low"</span><span class="p">:</span><span class="mf">10141.53</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"trades"</span><span class="p">:</span><span class="mi">50445638.61</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"vol"</span><span class="p">:</span><span class="mf">4940.96</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"eth"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"change"</span><span class="p">:</span><span class="s2">"-1.71"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"buy"</span><span class="p">:</span><span class="mi">214.09</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sell"</span><span class="p">:</span><span class="mi">214.38</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"high"</span><span class="p">:</span><span class="mi">214.92</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last"</span><span class="p">:</span><span class="mi">214.23</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"low"</span><span class="p">:</span><span class="mf">196.78</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"trades"</span><span class="p">:</span><span class="mi">8222181.8</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"vol"</span><span class="p">:</span><span class="mi">39749.57</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-tickers">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>change</td>
+<td>string</td>
+<td>Increase of position (contract transaction)</td>
+</tr>
+<tr>
+<td>buy</td>
+<td>float</td>
+<td>Best bid</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>float</td>
+<td>Best ask</td>
+</tr>
+<tr>
+<td>high</td>
+<td>float</td>
+<td>The high price</td>
+</tr>
+<tr>
+<td>last</td>
+<td>float</td>
+<td>The last price</td>
+</tr>
+<tr>
+<td>low</td>
+<td>float</td>
+<td>The low price</td>
+</tr>
+<tr>
+<td>trades</td>
+<td>float</td>
+<td>Aggregated trading value (in quote currency)</td>
+</tr>
+<tr>
+<td>vol</td>
+<td>float</td>
+<td>The trading volume in base currency of last 24 hours</td>
+</tr>
+</tbody></table>
+<h2 id="0f7bd4961a">Get Market Depth</h2>
+<p>This endpoint retrieves the current order book of a specific pair.</p>
+<h3 id="http-7">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/market/depth.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/market/depth.do?symbol=btc&amp;type=contract"</span>
+</code></pre><h3 id="1f9ac54b15-7">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>Btcside</td>
+<td>string</td>
+<td>false</td>
+<td>""</td>
+<td>Return precision or not</td>
+<td>"" or any string</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"amountDigits"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"digits"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7964.12</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0678</span><span class="p">],</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="p">[</span><span class="err">price</span><span class="p">,</span><span class="w"> </span><span class="err">amount</span><span class="p">]</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7963.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9162</span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7961</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7960.6</span><span class="p">,</span><span class="w"> </span><span class="mf">12.8898</span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7958</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2</span><span class="p">],</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7979.55</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0736</span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7980.6</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0292</span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7981</span><span class="p">,</span><span class="w"> </span><span class="mf">5.5652</span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7986.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2416</span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="mi">7990.66</span><span class="p">,</span><span class="w"> </span><span class="mf">1.9970</span><span class="p">],</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id="2213f4c32f-4">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amountDigits</td>
+<td>integer</td>
+<td>Quantities retain decimal places</td>
+</tr>
+<tr>
+<td>digits</td>
+<td>integer</td>
+<td>Prices retain decimal places</td>
+</tr>
+<tr>
+<td>bids</td>
+<td>object</td>
+<td>The current all bids in format [price, quote volume]</td>
+</tr>
+<tr>
+<td>asks</td>
+<td>object</td>
+<td>The current all asks in format [price, quote volume]</td>
+</tr>
+</tbody></table>
+<h2 id="trades">Get Contract History</h2>
+<p>This interface returns the contract transaction record to obtain the contract historical transaction record, Quantity: 50.</p>
+<h3 id="http-trades">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/market/trades.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/market/trades.do?symbol=btcusdt&amp;type=spot"</span>
+</code></pre>
+<h3 id="1f9ac54b15-trades">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>Btcside</td>
+<td>string</td>
+<td>false</td>
+<td>""</td>
+<td>Return precision or not</td>
+<td>"" or any string</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"amountDigits"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"digits"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">0.47</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date"</span><span class="p">:</span><span class="mi">1568876917</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="mi">9862.44</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"change"</span><span class="p">:</span><span class="mi">3.26</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tid"</span><span class="p">:</span><span class="mf">5509739</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"sell"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">0.07</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date"</span><span class="p">:</span><span class="mi">1568876900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="mi">9861.47</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"change"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tid"</span><span class="p">:</span><span class="mi">5509742</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-trades">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amountDigits</td>
+<td>integer</td>
+<td>Quantities retain decimal places</td>
+</tr>
+<tr>
+<td>digits</td>
+<td>integer</td>
+<td>Prices retain decimal places</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Transaction direction (buy or sell)</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>Aggregated trading volume during the interval (in base currency)</td>
+</tr>
+<tr>
+<td>date</td>
+<td>long</td>
+<td>Last trade time</td>
+</tr>
+<tr>
+<td>price</td>
+<td>float</td>
+<td>The limit price of limit order</td>
+</tr>
+<tr>
+<td>change</td>
+<td>float</td>
+<td>Increase of position (contract transaction)</td>
+</tr>
+<tr>
+<td>tid</td>
+<td>long</td>
+<td>id</td>
+</tr>
+</tbody></table>
+<h1 id="2a0d0be224">Account</h1>
+<aside class="notice">All endpoints in this section require authentication</aside>
+<h2 id="accounts">Query All Contract Assets</h2>
+<p>This interface returns to query all contract assets.</p>
+<h3 id="http-accounts">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/account/accounts.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/account/accounts.do?AppKey=b779e1982b77478d8d23e69f7e7df10f&amp;Timestamp=1570601407&amp;type=spot&amp;Signature=4469ee0fef8a34161956c42ce29746d7"</span>
+</code></pre>
+<h3 id="1f9ac54b15-accounts">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"available"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"frozen"</span><span class="p">:</span><span class="mf">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"usdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"available"</span><span class="p">:</span><span class="mi">214</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"frozen"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-accounts">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>available</td>
+<td>float</td>
+<td>Available Balance</td>
+</tr>
+<tr>
+<td>frozen</td>
+<td>float</td>
+<td>Frozen Balance</td>
+</tr>
+</tbody></table>
+<h2 id="account">Query Single Currency Assets</h2>
+<p>This interface returns to query a single contract asset.</p>
+<h3 id="http-account">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/account/account.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/account/account.do?AppKey=c5fe0cc7d3434efb817fef0ba63ea614&amp;Timestamp=1571209967&amp;symbol=btc&amp;type=contract&amp;Signature=c7d3dc4bddf8b530c355a930ce41af3e"</span>
+</code></pre>
+<h3 id="1f9ac54b15-account">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"available"</span><span class="p">:</span><span class="mi">1.64916</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"frozen"</span><span class="p">:</span><span class="mf">0</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-account">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>available</td>
+<td>float</td>
+<td>Available Balance</td>
+</tr>
+<tr>
+<td>frozen</td>
+<td>float</td>
+<td>Frozen Balance</td>
+</tr>
+</tbody></table>
+<h2 id="transfer">Transfer Asset (Between currency and contract)</h2>
+<p>Transfer in and out of contract account (Between currency and contract). </p>
+<h3 id="http-transfer">HTTP Request</h3>
+<ul>
+<li>POST <code>/v1/account/transfer.do</code></li>
+</ul>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"AppKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c5fe0cc7d3434efb817fef0ba63ea614"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571212250</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c5ac81af7f18d465232652ccee98b7fa"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contract"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"operation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="1f9ac54b15-transfer">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>operation</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Operation Direction</td>
+<td>in, out</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Amount</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="mi">1688</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-transfer">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>long</td>
+<td>Record id</td>
+</tr>
+</tbody></table>
+<h2 id="612d7943b6-records">Transfer Fund History Query</h2>
+<p>This interface queries the history of transfer fund. </p>
+<h3 id="http-records">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/account/transfer/records.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/account/transfer/records.do?AppKey=c5fe0cc7d3434efb817fef0ba63ea614&amp;Timestamp=1571213734&amp;direct=prev&amp;endTime=1571213617&amp;from=20&amp;side=all&amp;size=100&amp;startTime=1557543620&amp;symbol=btc&amp;type=contract&amp;Signature=3645b48620adfe0f5c784f7a1196ec7a"</span>
+</code></pre>
+<h3 id="1f9ac54b15-records">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>size</td>
+<td>integer</td>
+<td>false</td>
+<td>10</td>
+<td>Order Quantity</td>
+<td>[1-100]</td>
+</tr>
+<tr>
+<td>from</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>The Start Order ID</td>
+<td>It needs to be used together with the direct parameter</td>
+</tr>
+<tr>
+<td>direct</td>
+<td>string</td>
+<td>false</td>
+<td>NA</td>
+<td>Query Direction</td>
+<td>prev, next (Query direction should be used with the from parameter at the same time)</td>
+</tr>
+<td>startTime</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>Start Timestamp (s)</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>End Timestamp (s)</td>
+<td>Second Timestamps</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">0.1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"operation"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recordId"</span><span class="p">:</span><span class="mi">1688</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recordTime"</span><span class="p">:</span><span class="mi">1571212250</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">15.6</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"operation"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recordId"</span><span class="p">:</span><span class="mi">1671</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recordTime"</span><span class="p">:</span><span class="mi">1565674096</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-records">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>Transfer Amount</td>
+</tr>
+<tr>
+<td>operation</td>
+<td>integer</td>
+<td>Operation Direction, (1: in, 2: out)</td>
+</tr>
+<tr>
+<td>recordId</td>
+<td>long</td>
+<td>Record id</td>
+</tr>
+<tr>
+<td>recordTime</td>
+<td>long</td>
+<td>Operation Timestamp</td>
+</tr>
+</tbody></table>
+<h1 id="4832b46474">Contract Trade Interface</h1>
+<aside class="notice">Signature authentication is required to access the interface related to contract transaction. </aside>
+<h2 id="fd6ce2a756-place">Place A New Order</h2>
+<p>Send a new open order to Btcside for matching. </p>
+<h3 id="http-place">HTTP Request</h3>
+<ul>
+<li>POST <code>/v1/trade/orders/place.do</code></li>
+</ul>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"AppKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"284e7228ab324e1f82a13faada3cf431"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570856203</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bbb7fdff74908fff5e18052acce0612d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contract"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"multiple"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"operation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="1f9ac54b15-place">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Order Price</td>
+<td></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Order Amount</td>
+<td></td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>integer</td>
+<td>true</td>
+<td>NA</td>
+<td>Leverage Ratio (Contract only, spot is 0)</td>
+<td></td>
+</tr>
+<tr>
+<td>operation</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Order direction</td>
+<td>buy, sell</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1570856202112555"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-place">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>string</td>
+<td>Order ID</td>
+</tr>
+</tbody></table>
+<h2 id="fd6ce2a756-positions-close">Place Close Order</h2>
+<p>Send a closing order request to Btcside for matchmaking. </p>
+<h3 id="http-place">HTTP Request</h3>
+<ul>
+<li>POST <code>/v1/trade/positions/close.do</code></li>
+</ul>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"AppKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"284e7228ab324e1f82a13faada3cf431"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570858613</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad35471360bbaaeca74f0b02e2860d99"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contract"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8761"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="mi">197</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="1f9ac54b15-place">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Close Order Price</td>
+<td></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Close Order Amount</td>
+<td></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Position Id</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1570858612569602"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-place">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>string</td>
+<td>Order ID</td>
+</tr>
+</tbody></table>
+<h2 id="fd6ce2a756-positions">Contract Position Query</h2>
+<p>This interface returns the latest status and details for specifying a single order. </p>
+<h3 id="http-positions">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/trade/positions.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/trade/positions.do?AppKey=284e7228ab324e1f82a13faada3cf431&amp;Timestamp=1570856750&amp;symbol=btc&amp;type=contract&amp;Signature=5b133508bf308424ba9fe4ccff3752f5"</span>
+</code></pre>
+<h3 id="1f9ac54b15-positions">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"allCount"</span><span class="p">:</span><span class="mi">0.2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"avgPrice"</span><span class="p">:</span><span class="mi">10945</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"deposit"</span><span class="p">:</span><span class="mi">109.45</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"direction"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"floatingProfitLoss"</span><span class="p">:</span><span class="mi">-524.462</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"forcedLiquidationPrice"</span><span class="p">:</span><span class="mi">1742.74</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"holdCount"</span><span class="p">:</span><span class="mi">0.2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lockCount"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"positionId"</span><span class="p">:</span><span class="s2">"198"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profitLossRatio"</span><span class="p">:</span><span class="s2">"-479.17%"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"stopLoss"</span><span class="p">:</span><span class="mi">False</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"allCount"</span><span class="p">:</span><span class="mi">0.3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"avgPrice"</span><span class="p">:</span><span class="mi">10148.96</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"deposit"</span><span class="p">:</span><span class="mi">152.2344</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"direction"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"floatingProfitLoss"</span><span class="p">:</span><span class="mi">547.8819</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"forcedLiquidationPrice"</span><span class="p">:</span><span class="mi">14650.54</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"holdCount"</span><span class="p">:</span><span class="mi">0.3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lockCount"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"positionId"</span><span class="p">:</span><span class="s2">"197"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profitLossRatio"</span><span class="p">:</span><span class="s2">"359.89%"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"stopLoss"</span><span class="p">:</span><span class="mi">False</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-positions">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>allCount</td>
+<td>float</td>
+<td>Total Positions</td>
+</tr>
+<tr>
+<td>avgPrice</td>
+<td>float</td>
+<td>Average Price Of Position</td>
+</tr>
+<tr>
+<td>deposit</td>
+<td>float</td>
+<td>Deposit</td>
+</tr>
+<tr>
+<td>direction</td>
+<td>integer</td>
+<td>Direction, 1-multi position, 2-empty position</td>
+</tr>
+<tr>
+<td>floatingProfitLoss</td>
+<td>float</td>
+<td>Floating Profit / Loss</td>
+</tr>
+<tr>
+<td>forcedLiquidationPrice</td>
+<td>float</td>
+<td>Forced Liquidation Price</td>
+</tr>
+<tr>
+<td>holdCount</td>
+<td>float</td>
+<td>Hold Count</td>
+</tr>
+<tr>
+<td>lockCount</td>
+<td>float</td>
+<td>Lock Count</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>integer</td>
+<td>Leverage Ratio (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>position ID</td>
+</tr>
+<tr>
+<td>profitLossRatio</td>
+<td>string</td>
+<td>Profit / Loss Ratio</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>stopLoss</td>
+<td>boolean</td>
+<td>Whether To Stop Profit Or Loss</td>
+</tr>
+</tbody></table>
+<h2 id="4e53c0fccd-cancel">Cancel Order</h2>
+<p>This interface sends a request to cancel an order. </p>
+<aside class="warning">This interface only submits cancellation request, and the actual cancellation result needs to be confirmed through order status and other interfaces. </aside>
+<h3 id="http-20">HTTP Request</h3>
+<ul>
+<li>POST <code>/v1/trade/orders/cancel.do</code></li>
+</ul>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"AppKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"284e7228ab324e1f82a13faada3cf431"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570859741</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e62466a824ef5025db0e8077f0cf9bb8"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contract"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1570859608609294"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="1f9ac54b15-place">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Order ID</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1570859608609294"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-place">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>string</td>
+<td>Order ID</td>
+</tr>
+</tbody></table>
+<h2 id="open-orders-batchCancel">Submit Cancel for Multiple Orders by IDs</h2>
+<p>This endpoint submit cancellation for multiple orders at once with given ids.</p>
+<aside class="warning">This interface only submits cancellation request, and the actual cancellation result needs to be confirmed through order status and other interfaces.</aside>
+<h3 id="http-batchCancel">HTTP Request</h3>
+<ul>
+<li>POST <code>/v1/trade/orders/batchCancel.do</code></li>
+</ul>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"AppKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"284e7228ab324e1f82a13faada3cf431"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570859962</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"038d9669e0eeb4b0736c0671efde2ad1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contract"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="1f9ac54b15-batchCancel">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>side</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Order Type</td>
+<td>all, buy, sell</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"successCount"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"failedCount"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-batchCancel">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>successCount</td>
+<td>integer</td>
+<td>Cancel Successful Order Quantity</td>
+</tr>
+<tr>
+<td>failedCount</td>
+<td>integer</td>
+<td>Cancel Failed Order Quantity</td>
+</tr>
+</tbody></table>
+<h2 id="92d59b6aad">Get the Order Detail of an Order</h2>
+<p>This endpoint returns the detail of one order.</p>
+<h3 id="http-order">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/trade/order.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/order.do?AppKey=284e7228ab324e1f82a13faada3cf431&amp;Timestamp=1570860157&amp;orderId=1570859608609294&amp;symbol=btc&amp;type=contract&amp;Signature=6ff9c32bd3adbb5eef3cea9f5ba2c60a"</span>
+</code></pre>
+<h3 id="1f9ac54b15-order">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Order ID</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">0.1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createTime"</span><span class="p">:</span><span class="mi">1570859608</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dealAmount"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delegation_id"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deposit"</span><span class="p">:</span><span class="mi">70</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"direction"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"orderId"</span><span class="p">:</span><span class="s2">"1570859608609294"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="mi">14000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"priority"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"undealAmount"</span><span class="p">:</span><span class="mi">0.1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-order">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>Order Amount</td>
+</tr>
+<tr>
+<td>createTime</td>
+<td>long</td>
+<td>Order Create Time</td>
+</tr>
+<tr>
+<td>dealAmount</td>
+<td>float</td>
+<td>Deal Amount</td>
+</tr>
+<tr>
+<td>delegation_id</td>
+<td>long</td>
+<td>Delegation ID</td>
+</tr>
+<tr>
+<td>deposit</td>
+<td>float</td>
+<td>deposit (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>direction</td>
+<td>integer</td>
+<td>Order direction, 1-buy, 2-sell</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>integer</td>
+<td>Leverage Ratio (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>string</td>
+<td>Order ID</td>
+</tr>
+<tr>
+<td>price</td>
+<td>float</td>
+<td>Order Price</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>integer</td>
+<td>Order Type: 1-open, 2-close (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>Order Status: submitting, submitted, filled, canceled</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>undealAmount</td>
+<td>float</td>
+<td>Undeal Amount</td>
+</tr>
+</tbody></table>
+<h2 id="92d59b6aad-orders">Query Current Pending Orders</h2>
+<p>This interface queries current pending orders based on search criteria.</p>
+<h3 id="http-orders">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/trade/orders.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/trade/orders.do?AppKey=284e7228ab324e1f82a13faada3cf431&amp;Timestamp=1570860897&amp;endTime=1570860882&amp;size=100&amp;startTime=1557543620&amp;states=submitted%2Csubmitting&amp;symbol=btc&amp;type=contract&amp;Signature=afb5d55b8bd35c471fea80bffcb0724b"</span>
+</code></pre>
+<h3 id="1f9ac54b15-orders">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>size</td>
+<td>integer</td>
+<td>false</td>
+<td>10</td>
+<td>Order Quantity</td>
+<td>[1-100]</td>
+</tr>
+<tr>
+<td>states</td>
+<td>string</td>
+<td>false</td>
+<td>submitted</td>
+<td>Order Status Set (separated by ",")</td>
+<td>submitting, submitted</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>Start Timestamp (s)</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>End Timestamp (s)</td>
+<td>Second Timestamps</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">0.15</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createTime"</span><span class="p">:</span><span class="mi">1570860856</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dealAmount"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"delegation_id"</span><span class="p">:</span><span class="mi">55144733</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"deposit"</span><span class="p">:</span><span class="mi">105.075</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"direction"</span><span class="p">:</span><span class="mf">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="s2">"1570860856236224"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="mi">14010</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"priority"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="s2">"submitted"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"undealAmount"</span><span class="p">:</span><span class="mi">0.15</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">0.1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createTime"</span><span class="p">:</span><span class="mi">1570860647</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dealAmount"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"delegation_id"</span><span class="p">:</span><span class="mi">55139855</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"deposit"</span><span class="p">:</span><span class="mi">70.025</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"direction"</span><span class="p">:</span><span class="mf">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="s2">"1570860647390484"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="mi">14005</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"priority"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="s2">"submitted"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"undealAmount"</span><span class="p">:</span><span class="mi">0.1</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-orders">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>Order Amount</td>
+</tr>
+<tr>
+<td>createTime</td>
+<td>long</td>
+<td>Order Create Time</td>
+</tr>
+<tr>
+<td>dealAmount</td>
+<td>float</td>
+<td>Deal Amount</td>
+</tr>
+<tr>
+<td>delegation_id</td>
+<td>long</td>
+<td>Delegation ID</td>
+</tr>
+<tr>
+<td>deposit</td>
+<td>float</td>
+<td>Deposit (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>direction</td>
+<td>integer</td>
+<td>Order direction, 1-buy, 2-sell</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>integer</td>
+<td>Leverage Ratio (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>string</td>
+<td>Order ID</td>
+</tr>
+<tr>
+<td>price</td>
+<td>float</td>
+<td>Order Price</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>integer</td>
+<td>Order type, 1-open, 2-close (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>Order State: submitting, submitted, filled, canceled</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>undealAmount</td>
+<td>float</td>
+<td>Undeal Amount</td>
+</tr>
+</tbody></table>
+<h2 id="92d59b6aad-tradeApi-historyOrders">Query History Order</h2>
+<p>This interface queries for historical orders based on search criteria.</p>
+<h3 id="http-tradeApi-historyOrders">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/trade/history/orders.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/trade/history/orders.do?AppKey=284e7228ab324e1f82a13faada3cf431&amp;Timestamp=1571216140&amp;direct=prev&amp;endTime=1571213617&amp;from=20&amp;size=100&amp;startTime=1557543620&amp;symbol=btc&amp;type=contract&amp;Signature=2908abbe7559379d44273f47e0299c07"</span>
+</code></pre>
+<h3 id="1f9ac54b15-tradeApi-historyOrders">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>size</td>
+<td>integer</td>
+<td>false</td>
+<td>10</td>
+<td>Order Quantity</td>
+<td>[1-100]</td>
+</tr>
+<tr>
+<td>from</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>The Start Order ID</td>
+<td>It needs to be used together with the direct parameter</td>
+</tr>
+<tr>
+<td>direct</td>
+<td>string</td>
+<td>false</td>
+<td>NA</td>
+<td>Query Direction</td>
+<td>prev, next (Query direction should be used with the from parameter at the same time)</td>
+</tr>
+<td>startTime</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>Start Timestamp (s)</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>End Timestamp (s)</td>
+<td>Second Timestamps</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">0.15</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dealAmount"</span><span class="p">:</span><span class="mi">105.075</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"deposit"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"direction"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="mi">14010</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recordId"</span><span class="p">:</span><span class="mi">1314</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeAvgPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"undealAmount"</span><span class="p">:</span><span class="mi">0.15</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="s2">"1570860856236224"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createTime"</span><span class="p">:</span><span class="mi">1570860856</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updateTime"</span><span class="p">:</span><span class="mi">1570860856</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeType"</span><span class="p">:</span><span class="mi">3</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="mi">0.1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dealAmount"</span><span class="p">:</span><span class="mi">47.5</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"deposit"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"direction"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="mi">9500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recordId"</span><span class="p">:</span><span class="mi">980</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeAvgPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"undealAmount"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="s2">"1565581905261969"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createTime"</span><span class="p">:</span><span class="mi">1565581905</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updateTime"</span><span class="p">:</span><span class="mi">1565581905</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeType"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-tradeApi-historyOrders">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>Order Amount</td>
+</tr>
+<tr>
+<td>dealAmount</td>
+<td>float</td>
+<td>Deal Amount</td>
+</tr>
+<tr>
+<td>deposit</td>
+<td>float</td>
+<td>deposit (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>direction</td>
+<td>integer</td>
+<td>Direction, 1- buy, 2- sell</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>integer</td>
+<td>Leverage Ratio (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>price</td>
+<td>float</td>
+<td>Order price</td>
+</tr>
+<tr>
+<td>recordId</td>
+<td>integer</td>
+<td>Record ID</td>
+</tr>
+<tr>
+<td>tradeAvgPrice</td>
+<td>float</td>
+<td>Trade Average Price</td>
+</tr>
+<tr>
+<td>undealAmount</td>
+<td>float</td>
+<td>Undeal Amount</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>string</td>
+<td>Order Id</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>createTime</td>
+<td>long</td>
+<td>Create Timestamp</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>long</td>
+<td>Operation Timestamp</td>
+</tr>
+<tr>
+<td>tradeType</td>
+<td>integer</td>
+<td>Trade Type: 1- multiple single open positions, 2- multiple single unwinding positions, 3- empty single open positions, 4- empty single unwinding positions (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>Order State, submitting, submitted, filled, canceled</td>
+</tr>
+</tbody></table>
+<h2 id="92d59b6aad-tradeApi-trades">Query Transaction Records</h2>
+<p>This interface queries for transaction records based on search criteria.</p>
+<h3 id="http-tradeApi-trades">HTTP Request</h3>
+<ul>
+<li>GET <code>/v1/trade/history/trades.do</code></li>
+</ul>
+<pre class="highlight shell tab-shell" style=""><code>curl <span class="s2">"http://app.Btcside.com/v1/trade/history/trades.do?AppKey=284e7228ab324e1f82a13faada3cf431&amp;Timestamp=1570861659&amp;direct=prev&amp;from=20&amp;size=100&amp;symbol=btc&amp;type=contract&amp;Signature=0a87b4d9ee8df333d6a93de95051c4a0"</span>
+</code></pre>
+<h3 id="1f9ac54b15-tradeApi-trades">Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AppKey</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>It is used in API request</td>
+<td>The 'Access Key' in your API Key</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>long</td>
+<td>true</td>
+<td>NA</td>
+<td>Timestamp</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Signature</td>
+<td>Calculated value by signature</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>contract</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>size</td>
+<td>integer</td>
+<td>false</td>
+<td>10</td>
+<td>Order Quantity</td>
+<td>[1-100]</td>
+</tr>
+<tr>
+<td>from</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>The Start Order ID</td>
+<td>It needs to be used together with the direct parameter</td>
+</tr>
+<tr>
+<td>direct</td>
+<td>string</td>
+<td>false</td>
+<td>NA</td>
+<td>Query Direction</td>
+<td>prev, next (Query direction should be used with the from parameter at the same time)</td>
+</tr>
+<td>startTime</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>Start Timestamp (s)</td>
+<td>Second Timestamps</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>long</td>
+<td>false</td>
+<td>NA</td>
+<td>End Timestamp (s)</td>
+<td>Second Timestamps</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"direction"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"holdPrice"</span><span class="p">:</span><span class="mi">10148.96333333</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeBtcsideFee"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeCount"</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeDeposit"</span><span class="p">:</span><span class="mi">50.74481667</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeFee"</span><span class="p">:</span><span class="mi">5.839967</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="mi">210729</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeIncome"</span><span class="p">:</span><span class="mi">180.61533333</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradePrice"</span><span class="p">:</span><span class="mi">8342.81</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeTime"</span><span class="p">:</span><span class="mi">1570858612</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeType"</span><span class="p">:</span><span class="mi">4</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"direction"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"holdPrice"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multiple"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeBtcsideFee"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeCount"</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeDeposit"</span><span class="p">:</span><span class="mi">42.78445</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeFee"</span><span class="p">:</span><span class="mi">5.989823</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="mi">207786</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeIncome"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradePrice"</span><span class="p">:</span><span class="mi">8556.89</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeTime"</span><span class="p">:</span><span class="mi">1570770977</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeType"</span><span class="p">:</span><span class="mi">3</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="2213f4c32f-tradeApi-trades">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>direction</td>
+<td>integer</td>
+<td>Direction, 1- buy, 2- sell</td>
+</tr>
+<tr>
+<td>holdPrice</td>
+<td>float</td>
+<td>hold Price (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>integer</td>
+<td>Leverage Ratio (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading Symbol</td>
+</tr>
+<tr>
+<td>tradeBtcsideFee</td>
+<td>float</td>
+<td>Btcside platform coin offset transaction fee</td>
+</tr>
+<tr>
+<td>tradeCount</td>
+<td>float</td>
+<td>Trade Count</td>
+</tr>
+<tr>
+<td>tradeDeposit</td>
+<td>float</td>
+<td>Trade Deposit (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>tradeFee</td>
+<td>float</td>
+<td>Trade Fee</td>
+</tr>
+<tr>
+<td>tradeId</td>
+<td>long</td>
+<td>Trade ID</td>
+</tr>
+<tr>
+<td>tradeIncome</td>
+<td>float</td>
+<td>trade Income (Contract only, spot is 0)</td>
+</tr>
+<tr>
+<td>tradePrice</td>
+<td>float</td>
+<td>Trade price</td>
+</tr>
+<tr>
+<td>tradeTime</td>
+<td>long</td>
+<td>Last trade time</td>
+</tr>
+<tr>
+<td>tradeType</td>
+<td>integer</td>
+<td>Trade Type: 1- multiple single open positions, 2- multiple single unwinding positions, 3- empty single open positions, 4- empty single unwinding positions (Contract only, spot is 0)</td>
+</tr>
+</tbody></table>
+<h1 id="websocket">Websocket Market Data</h1>
+<h2 id="5ea2e0cde2-2">General</h2>
+<h3 id="url">Websocket URL</h3>
+<p><strong>Websocket Market Feed</strong></p>
+
+<p><strong><code>wss://app.Btcside.com/v1/ws</code></strong></p>
+
+<h3 id="1853724646">Heartbeat and Connection</h3>
+
+<!--pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"ping"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570678375</span><span class="p">}</span></code></pre-->
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"ping"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570678375</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>After connected to Btcside's Websocket server, the server will send heartbeat periodically (currently at 5s interval). The heartbeat <code>ping</code> message will have an integer in it, e.g.
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"ping": 1570678375
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<p></p>
+
+<!--pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"pong"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570678375</span><span class="p">}</span></code></pre-->
+<blockquote>
+<p>Subscribe request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"pong"</span><span class="p">:</span><span class="w"> </span><span class="mi">1570678375</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>When client receives this heartbeat message, it should response with a matching <code>pong</code> message which has the same integer in it, e.g.
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"pong": 1570678375
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<aside class="warning">After the server sent four consecutive heartbeat messages without receiving at least one matching "pong" response from a client, then right before server sends the next "ping" heartbeat, the server will disconnect this client.</aside>
+
+<p></p>
+
+<h3 id="65cd7614bc">Subscribe to Topic</h3>
+
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To receive data you have to send a "sub" message first.
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"sub": "topic to sub"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<p></p>
+
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscription failed, unsupported type: kline.contract.btccccc.15min"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571378705</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>If the subscription fails, the Websocket client will receive it
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"code": "Error code (0- success, others - failure)",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"msg": "Error message (when code=0 succeeds, this parameter is "")",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"ts": "Second timestamp"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<p></p>
+
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subbed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571373335</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>After successful subscription, the Websocket client receives confirmation: 
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"code": "Error code (0- success, others - failure)",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"msg": "Error message (when code=0 succeeds, this parameter is "")",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"subbed": "Subscription Address",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"ts": "Second Timestamps"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<p></p>
+
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571373361</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tick"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="mi">8070.65</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"high"</span><span class="p">:</span><span class="w"> </span><span class="mf">8072.18</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3453</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mf">8068.52</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"low"</span><span class="p">:</span><span class="w"> </span><span class="mf">8068.52</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="mf">1571373900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vol"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.56</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Then, as soon as the subscribed topic is updated, the Websocket client receives the update message pushed by the server
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"ch": "Subscription Address",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"ts": "Second Timestamps",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"tick": "Market Data"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+
+<h3 id="b109d834a1">Unsubscribe</h3>
+
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"unsub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Unsubscribe is formatted as follows (unsubscribe successfully with no return value)
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"unsub": "Unsubscribe address"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<p></p>
+
+<h3 id="db08fc8dfe">Pull Data</h3>
+
+<p>While connected to websocket, you can also use it in pull style by sending message to the server.</p>
+
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"req"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To request pull style data, you send below message
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"req": "The request url"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<p></p>
+
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rep"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571377747</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tick"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"high"</span><span class="p">:</span><span class="w"> </span><span class="mf">3900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mf">3900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"low"</span><span class="p">:</span><span class="w"> </span><span class="mf">3600</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="mf">1551685500</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vol"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.5</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="mi">3894.47</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"high"</span><span class="p">:</span><span class="w"> </span><span class="mf">3926.1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mf">3918.01</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"low"</span><span class="p">:</span><span class="w"> </span><span class="mf">3870.9</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="mf">1552024800</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vol"</span><span class="p">:</span><span class="w"> </span><span class="mf">53.28</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You will receive a response accordingly and immediately
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"code": "Error code (0- success, others - failure)",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"msg": "Error message (when code=0 succeeds, this parameter is "")",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"rep": "Subscription Address",
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"ts": "Second Timestamps"
+</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"tick": "Market Data"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<h2 id="k-2">Market Candlestick</h2>
+<h3 id="a94c7743c5">Topic</h3>
+<p>This topic sends a new candlestick whenever it is available.</p>
+
+<p><code>kline.$type.$symbol.$interval</code></p>
+
+<blockquote>
+<p>Subscribe request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="749d765242">Topic Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+<tr>
+<td>interval</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Kline Period</td>
+<td>1min, 3min, 5min, See below for details</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">Interval Value Range: <br>1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, <br>12hour, 1day</aside>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subbed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571393156</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="7bf990a9a9-99">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subbed</td>
+<td>string</td>
+<td>Subscription Address</td>
+</tr>
+<tr>
+<td>ts</td>
+<td>long</td>
+<td>Second Timestamps</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tick"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="mi">8070.65</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"high"</span><span class="p">:</span><span class="w"> </span><span class="mf">8072.18</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3453</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mf">8068.52</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"low"</span><span class="p">:</span><span class="w"> </span><span class="mf">8068.52</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="mf">1571373900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vol"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.56</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="7bf990a9a9">Update Content</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Contract Type</td>
+</tr>
+<tr>
+<td>first</td>
+<td>float</td>
+<td>The opening price</td>
+</tr>
+<tr>
+<td>high</td>
+<td>float</td>
+<td>The high price</td>
+</tr>
+<tr>
+<td>id</td>
+<td>long</td>
+<td>Record id</td>
+</tr>
+<tr>
+<td>last</td>
+<td>float</td>
+<td>The closing price</td>
+</tr>
+<tr>
+<td>low</td>
+<td>float</td>
+<td>The low price</td>
+</tr>
+<tr>
+<td>time</td>
+<td>long</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>vol</td>
+<td>float</td>
+<td>The trading volume in base currency of last 24 hours</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Req request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"req"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.contract.btc.15min"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="212e038c24">Pull Request</h3>
+<p>Pull request is supported. 
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"req": "kline.$type.$symbol.$interval"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<h2 id="8742b7d9f7">Market Depth</h2>
+<p>When market depth changes, this topic sends the latest market depth update data.</p>
+<h3 id="a94c7743c5-2">Topic</h3>
+<p><code>market.$type.$symbol.depth</code></p>
+
+<blockquote>
+<p>Subscribe request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market.contract.btc.depth"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="749d765242-2">Topic Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subbed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market.contract.btc.depth"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571379519</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="7bf990a9a9-2">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subbed</td>
+<td>string</td>
+<td>Subscription Address</td>
+</tr>
+<tr>
+<td>ts</td>
+<td>long</td>
+<td>Second Timestamps</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market.contract.btc.depth"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571379520</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tick"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="mf">7897.38</span><span class="p">,</span><span class="mf">0.02</span><span class="p">],</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="p">[</span><span class="err">price</span><span class="p">,</span><span class="w"> </span><span class="err">amount</span><span class="p">]</span><span class="w">
+    </span><span class="p">[</span><span class="mf">7897.18</span><span class="p">,</span><span class="mf">0.13</span><span class="p">]</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">Market</span><span class="w"> </span><span class="err">Depth</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">here</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="mf">7901.37</span><span class="p">,</span><span class="mf">0.2</span><span class="p">],</span><span class="w">
+    </span><span class="p">[</span><span class="mf">7901.16</span><span class="p">,</span><span class="mf">0.05</span><span class="p">]</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">Market</span><span class="w"> </span><span class="err">Depth</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">here</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="7bf990a9a9-2">Update Content</h3>
+<aside class="notice">Under 'tick' object there is a list of bids and a list of asks</aside>
+
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bids</td>
+<td>object</td>
+<td>The current all bids in format [price, quote volume]</td>
+</tr>
+<tr>
+<td>asks</td>
+<td>object</td>
+<td>The current all asks in format [price, quote volume]</td>
+</tr>
+</tbody></table>
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+
+<blockquote>
+<p>Req request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"req"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market.contract.btc.depth"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="212e038c24-2">Pull Request</h3>
+<p>Pull request is supported. 
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"req": "market.$type.$symbol.depth"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+<h2 id="56c6c47284-2">Trade Detail</h2>
+<p>This topic sends the latest completed trade. It updates in tick by tick mode.</p>
+<h3 id="a94c7743c5-3">Topic</h3>
+<p><code>market.$type.$symbol.trade</code></p>
+
+<blockquote>
+<p>Subscribe request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market.contract.btc.trade"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="749d765242-3">Topic Parameter</h3>
+<table><thead>
+<tr>
+<th>Parameter Name</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Default</th>
+<th>Description</th>
+<th>Value Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Market Types</td>
+<td>contract, spot, vcontract</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>NA</td>
+<td>Trading Symbol</td>
+<td>btc, eth, ht...</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subbed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market.contract.btc.trade"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571383431</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="7bf990a9a9-3">Return Parameter</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subbed</td>
+<td>string</td>
+<td>Subscription Address</td>
+</tr>
+<tr>
+<td>ts</td>
+<td>long</td>
+<td>Second Timestamps</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market.contract.btc.trade"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571379520</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tick"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.85</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"change"</span><span class="p">:</span><span class="w"> </span><span class="mi">1.7</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="mf">1571383457</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">7895.59</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tid"</span><span class="p">:</span><span class="w"> </span><span class="mf">114202</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="7bf990a9a9-3">Update Content</h3>
+<table><thead>
+<tr>
+<th>Field Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>Trade Volume</td>
+</tr>
+<tr>
+<td>change</td>
+<td>float</td>
+<td>Increase of position (contract transaction)</td>
+</tr>
+<tr>
+<td>date</td>
+<td>long</td>
+<td>Trade Time</td>
+</tr>
+<tr>
+<td>price</td>
+<td>float</td>
+<td>Trade Price</td>
+</tr>
+<tr>
+<td>tid</td>
+<td>long</td>
+<td>Trade ID</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Aggressive order side of the trade: 'buy' or 'sell'</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Req request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"req"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market.contract.btc.trade"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="212e038c24-3">Pull Request</h3>
+<p>Pull request is supported.
+<code style="padding: 0px;">
+</BR>&nbsp;&nbsp;{</BR>
+&nbsp;&nbsp;&nbsp;&nbsp;"req": "market.$type.$symbol.trade"
+</BR>&nbsp;&nbsp;}</code>
+</p>
+
+
+<p><br>
+<br>
+<br>
+<br>
+<br></p>
+
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell" class="active">shell</a>
+          </div>
+      </div>
+    </div>
+    <script>
+      const lang_btn = document.getElementById('lang_box');
+      const btn_spot = document.getElementById('btn_spot');
+      const btn_dm = document.getElementById('btn_dm');
+      const v1_url = document.getElementById('v1_url');
+      const v2_url = document.getElementById('v2_url');
+      const url = GetUrlRelativePath();
+      ////if(url.indexOf('cn') != -1){
+      //if(url.indexOf('cn') != 0){
+      //  //如果是中文环境
+      //  lang_btn.innerHTML = 'English';
+      //  btn_spot.innerHTML = '现货API';
+      //  btn_dm.innerHTML = '合约API';
+      //  lang_btn.href = url.replace('cn/', 'en/');
+      //  btn_spot.href = btn_spot.href.replace('en/', 'cn/');
+      //  btn_dm.href = btn_dm.href.replace('en/', 'cn/');
+      //  v1_url.href = '/docs/spot/v1/cn/';
+      //  v2_url.href = '/docs/spot/v2/cn/';
+      //}else{
+      //  //如果是英文环境
+      //  lang_btn.innerHTML = '中文';
+      //  btn_spot.innerHTML = 'Spot API';
+      //  btn_dm.innerHTML = 'Contract API';
+      //  lang_btn.href = url.replace('en/', 'cn/');
+      //  btn_spot.href = btn_spot.href.replace('cn/', 'en/');
+      //  btn_dm.href = btn_dm.href.replace('cn/', 'en/');
+      //  v1_url.href = '/docs/spot/v1/en/';
+      //  v2_url.href = '/docs/spot/v2/en/';
+      //}
+      
+      //if(location.href.indexOf('docs/dm/v') > 0){
+      if(location.href.indexOf('contract.html') > 0){
+        btn_spot.className = '';
+        btn_dm.className = 'current';
+      } else {
+        btn_spot.className = 'current';
+        btn_dm.className = '';
+      }
+      //显示语言切换按钮
+      //lang_btn.style.display = 'block';
+      function GetUrlRelativePath(){
+        let url = document.location.toString();
+        let arrUrl = url.split("//");
+        let start = arrUrl[1].indexOf("/");
+        let relUrl = arrUrl[1].substring(start);
+        if(relUrl.indexOf("?") != -1){
+          relUrl = relUrl.split("?")[0];
+        }
+        if(relUrl.indexOf("#") != -1){
+          relUrl = relUrl.split("#")[0];
+        }
+        return relUrl;
+  　　}
+    </script>
+  
+</body></html>

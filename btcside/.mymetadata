@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="BFX"
+  id="myeclipse.1405911604189"
+  context-root="/ROOT"
+  j2ee-spec="5.0"
+  archive="BFX.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

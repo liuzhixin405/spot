@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+		version="2.0">
+	<description>My Tag Library</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>MyJSPTag</short-name>
+	<uri>http://tag.bfx.un</uri>
+	
+	<tag>
+		<description>format UnixTime</description>
+		<name>formatDate</name>
+		<tag-class>com.btc100.btc_q.tags.DateUtilTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>dateline</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+</taglib>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!--  Spring 服务层的配置文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>WEB-INF/classes/applicationContext*.xml</param-value>
+	</context-param>
+
+	<!--  Spring 容器启动监听器 -->
+	<listener>
+		<description>spring listerner</description>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!--
+		Spring MVC 的Servlet，它将加载WEB-INF/hyz-servlet.xml 的 配置文件，以启动Spring MVC模块
+	-->
+	<servlet>
+		<servlet-name>btc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 初始化参数 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/btc-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<!-- 拦截所有以 do 结尾的请求 -->
+	<servlet-mapping>
+		<servlet-name>btc</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>btc</servlet-name>
+		<url-pattern>/home/home</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>openEntityManagerInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>openEntityManagerInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>walletAutoService</filter-name>
+		<filter-class>com.btc100.btc_q.autoservice.WalletPlatfromAutoServiceFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>walletAutoService</filter-name>
+		<url-pattern>/wallet-auto-service</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>pager-taglib</filter-name>
+		<filter-class>com.btc100.btc_q.filter.PagerFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>pager-taglib</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 配置找不到页面时返回的页面   -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404.html</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/500.html</location>
+	</error-page>
+	
+	<welcome-file-list>
+		<welcome-file>home/home</welcome-file>
+	</welcome-file-list>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://tag.bfx.un</taglib-uri>
+			<taglib-location>/WEB-INF/tld/UtilsClass.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+	
+
+</web-app>
